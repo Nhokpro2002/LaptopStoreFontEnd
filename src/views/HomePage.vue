@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Navbar -->
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="#070d12">
       <v-container>
         <v-row
           align="center"
@@ -11,14 +11,18 @@
         >
           <!-- Logo -->
           <v-col cols="auto">
-            <v-toolbar-title class="font-weight-bold"
+            <v-toolbar-title class="font-weight-bold" style="color: #00ffff"
               >Laptop Store</v-toolbar-title
             >
           </v-col>
           <v-col cols="auto">
-            <v-btn text class="text-none d-flex align-center">
-              <v-icon>mdi-reorder-horizontal</v-icon>
-              <span>Category</span>
+            <v-btn
+              text
+              class="text-none d-flex align-center"
+              @click="toggleCategory"
+            >
+              <v-icon style="color: #00ffff">mdi-reorder-horizontal</v-icon>
+              <span style="color: #00ffff">Category</span>
             </v-btn>
           </v-col>
 
@@ -39,23 +43,31 @@
           <!-- Navigation Buttons -->
           <v-col cols="12" xs="5" sm="4" md="6" class="d-flex justify-end">
             <v-btn text class="hidden-xs-only text-none d-flex align-center">
-              <v-icon left>mdi-phone</v-icon>
+              <v-icon left style="color: #00ffff">mdi-phone</v-icon>
               <span>Hotline</span>
             </v-btn>
 
             <v-btn text class="hidden-xs-only text-none d-flex align-center">
-              <v-icon left>mdi-store</v-icon>
+              <v-icon left style="color: #00ffff">mdi-store</v-icon>
               <span>Showroom System</span>
             </v-btn>
 
             <v-btn text class="text-none d-flex align-center">
-              <v-icon left>mdi-cart</v-icon>
+              <v-icon left style="color: #00ffff">mdi-cart</v-icon>
               <span>Shopping Cart</span>
+            </v-btn>
+
+            <v-btn text class="text-none d-flex align-center">
+              <v-icon left style="color: #00ffff">mdi-account</v-icon>
+              <span style="color: #00ffff">User</span>
             </v-btn>
           </v-col>
         </v-row>
       </v-container>
     </v-app-bar>
+
+    <!-- Category Screen Component -->
+    <CategoryScreen :visible="showCategory" @close="showCategory = false" />
 
     <!-- Hero Section - Auto Slide -->
     <v-container fluid>
@@ -87,7 +99,7 @@
             <v-card-title>{{ laptop.name }}</v-card-title>
             <v-card-subtitle>{{ laptop.price }}</v-card-subtitle>
             <v-card-actions>
-              <v-btn color="primary">Buy Now</v-btn>
+              <v-btn color="primary" class="button_buy_now">Buy Now</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -110,6 +122,7 @@
   margin-right: 20px;
   position: relative;
   margin-top: 0;
+  border-color: red;
 }
 
 .equal-image {
@@ -117,52 +130,124 @@
   height: 100%;
   object-fit: cover;
 }
+
+span {
+  color: #00ffff;
+  transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+span:hover {
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Hiệu ứng phát sáng */
+}
+
+/* Khi chưa click vào (màu viền khác với màu nền) */
+::v-deep(.v-input) {
+  border: 2px solid #888 !important; /* Viền xám nhạt */
+  background-color: #ffffff !important; /* Nền tối hơn một chút */
+  color: #00f0ff !important; /* Màu chữ sáng hơn */
+  transition: all 0.3s ease-in-out;
+}
+
+/* Khi click vào (focus) */
+::v-deep(.v-input.v-input--is-focused) {
+  border-color: #00f0ff !important; /* Viền xanh neon */
+  color: #00f0ff !important; /* Màu chữ xanh neon */
+  box-shadow: 0 0 10px #00f0ff; /* Hiệu ứng phát sáng */
+}
+
+/* Placeholder cũng đổi màu khi focus */
+::v-deep(.v-input input::placeholder) {
+  color: #00f0ff !important; /* Màu chữ placeholder nhạt */
+}
+
+::v-deep(.v-input.v-input--is-focused input::placeholder) {
+  color: rgba(
+    0,
+    240,
+    255,
+    0.7
+  ) !important; /* Placeholder phát sáng khi focus */
+}
+
+.button_buy_now {
+  background-color: blue !important;
+  color: white;
+}
+
+.button_buy_now:hover {
+  background-color: red !important;
+}
 </style>
 
-<script>
-export default {
-  data() {
+<script lang="ts">
+import { defineComponent, ref } from "vue";
+import CategoryScreen from "@/views/CategoryScreen.vue";
+
+export default defineComponent({
+  components: {
+    CategoryScreen,
+  },
+  setup() {
+    // Search query state
+    const searchQuery = ref<string>("");
+
+    // Laptop list
+    const laptops = ref([
+      {
+        name: "ASUS TUF Gaming",
+        price: "$123",
+        image: require("@/assets/w800.png"),
+      },
+      {
+        name: "ASUS TUF Gaming",
+        price: "$234",
+        image: require("@/assets/laptop_asus_2.png"),
+      },
+      {
+        name: "ASUS TUF Gaming",
+        price: "$345",
+        image: require("@/assets/laptop_asus_2.png"),
+      },
+      {
+        name: "ASUS TUF Gaming",
+        price: "$456",
+        image: require("@/assets/laptop_asus_2.png"),
+      },
+      {
+        name: "ASUS TUF Gaming",
+        price: "$567",
+        image: require("@/assets/laptop_asus_2.png"),
+      },
+      {
+        name: "ASUS TUF Gaming",
+        price: "$678",
+        image: require("@/assets/laptop_asus_2.png"),
+      },
+    ]);
+
+    // Image list
+    const images = ref([
+      "https://www.homepaylater.vn/static/f8fd5d1834c70f3455a7de77e6cf5040/c579c/co_bao_nhieu_dong_laptop_gaming_asus_so_sanh_giua_cac_dong_1aedfd3e5a.webp",
+      "https://nvidianews.nvidia.com/_gallery/get_file/?file_id=677c4a633d63324b1c25f259",
+      "https://mark.scorptec.com.au/ASUSROGFlowmed.jpg",
+      "https://cdn.mos.cms.futurecdn.net/yqAB9eKn2hUsfKusqSE3v6-1000-80.jpg",
+    ]);
+
+    // Category screen visibility state
+    const showCategory = ref<boolean>(false);
+
+    // Toggle function
+    const toggleCategory = () => {
+      showCategory.value = !showCategory.value;
+    };
+
     return {
-      searchQuery: "",
-      laptops: [
-        {
-          name: "Laptop A",
-          price: "$123",
-          image: require("@/assets/w800.png"),
-        },
-        {
-          name: "Laptop B",
-          price: "$234",
-          image: require("@/assets/laptop_asus_2.png"),
-        },
-        {
-          name: "Laptop C",
-          price: "$345",
-          image: require("@/assets/laptop_asus_2.png"),
-        },
-        {
-          name: "Laptop D",
-          price: "$456",
-          image: require("@/assets/laptop_asus_2.png"),
-        },
-        {
-          name: "Laptop E",
-          price: "$567",
-          image: require("@/assets/laptop_asus_2.png"),
-        },
-        {
-          name: "Laptop F",
-          price: "$678",
-          image: require("@/assets/laptop_asus_2.png"),
-        },
-      ],
-      images: [
-        "https://www.homepaylater.vn/static/f8fd5d1834c70f3455a7de77e6cf5040/c579c/co_bao_nhieu_dong_laptop_gaming_asus_so_sanh_giua_cac_dong_1aedfd3e5a.webp",
-        "https://nvidianews.nvidia.com/_gallery/get_file/?file_id=677c4a633d63324b1c25f259",
-        "https://mark.scorptec.com.au/ASUSROGFlowmed.jpg",
-        "https://cdn.mos.cms.futurecdn.net/yqAB9eKn2hUsfKusqSE3v6-1000-80.jpg",
-      ],
+      searchQuery,
+      laptops,
+      images,
+      showCategory,
+      toggleCategory,
     };
   },
-};
+});
 </script>
