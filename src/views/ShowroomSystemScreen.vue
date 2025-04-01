@@ -1,27 +1,21 @@
 <template>
-  <v-container class="category-screen" v-if="visible">
+  <v-container class="showroom-system-screen" v-if="visible">
     <v-card class="pa-5">
-      <v-card-title>Category List</v-card-title>
+      <v-card-title>Showrooms</v-card-title>
       <v-card-text>
-        <span>Gaming Laptops</span>
+        <span>Location A</span>
       </v-card-text>
       <v-card-text>
-        <span>Office Laptops</span>
+        <span>Location B</span>
       </v-card-text>
       <v-card-text>
-        <span>Main, CPU, VGA</span>
+        <span>Location C</span>
       </v-card-text>
       <v-card-text>
-        <span>Case, Power, Cooling</span>
+        <span>Location D</span>
       </v-card-text>
       <v-card-text>
-        <span>Hard drive, RAM, Memory Card</span>
-      </v-card-text>
-      <v-card-text>
-        <span>Screen</span>
-      </v-card-text>
-      <v-card-text>
-        <span>Keyboard</span>
+        <span>Location E</span>
       </v-card-text>
       <v-btn color="error" @click="$emit('close')">Close</v-btn>
     </v-card>
@@ -39,13 +33,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.category-screen {
+.showroom-system-screen {
   position: fixed;
   top: 50px;
   left: 50%;
-  transform: translateX(-213%);
+  transform: translateX(90%);
   background: rgba(0, 0, 0, 0.8);
-  width: 300px;
+  width: 200px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);

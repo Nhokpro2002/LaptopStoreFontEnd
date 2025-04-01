@@ -47,7 +47,11 @@
               <span>Hotline</span>
             </v-btn>
 
-            <v-btn text class="hidden-xs-only text-none d-flex align-center">
+            <v-btn
+              text
+              class="hidden-xs-only text-none d-flex align-center"
+              @click="toggleShowroomSystem"
+            >
               <v-icon left style="color: #00ffff">mdi-store</v-icon>
               <span>Showroom System</span>
             </v-btn>
@@ -68,6 +72,12 @@
 
     <!-- Category Screen Component -->
     <CategoryScreen :visible="showCategory" @close="showCategory = false" />
+
+    <!-- Showroom System Screen Component -->
+    <ShowroomSystemScreen
+      :visible="showShowroomSystem"
+      @close="showShowroomSystem = false"
+    />
 
     <!-- Hero Section - Auto Slide -->
     <v-container fluid>
@@ -182,13 +192,15 @@ span:hover {
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import CategoryScreen from "@/views/CategoryScreen.vue";
+import ShowroomSystemScreen from "@/views/ShowroomSystemScreen.vue";
 
 export default defineComponent({
   components: {
     CategoryScreen,
+    ShowroomSystemScreen,
   },
   setup() {
-    // Search query state
+    // Search Bar
     const searchQuery = ref<string>("");
 
     // Laptop list
@@ -235,10 +247,15 @@ export default defineComponent({
 
     // Category screen visibility state
     const showCategory = ref<boolean>(false);
+    const showShowroomSystem = ref<boolean>(false);
 
     // Toggle function
     const toggleCategory = () => {
       showCategory.value = !showCategory.value;
+    };
+
+    const toggleShowroomSystem = () => {
+      showShowroomSystem.value = !showShowroomSystem.value;
     };
 
     return {
@@ -247,6 +264,8 @@ export default defineComponent({
       images,
       showCategory,
       toggleCategory,
+      showShowroomSystem,
+      toggleShowroomSystem,
     };
   },
 });
