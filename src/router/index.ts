@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-//import VuetifyDemo from "../views/VuetifyDemo.vue";
 import HomePage from "../views/HomePage.vue";
+import RegisterPage from "../views/RegisterPage.vue"; // Import RegisterPage
 
 Vue.use(VueRouter);
 
@@ -9,13 +9,17 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "home",
-    //component: HomeView,
     component: HomePage,
-    //component: VuetifyDemo,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: RegisterPage, // Thêm route cho trang đăng ký
   },
 ];
 
 const router = new VueRouter({
+  mode: "history", // Dùng mode "history" để bỏ dấu "#" trên URL
   routes,
 });
 
