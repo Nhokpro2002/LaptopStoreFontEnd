@@ -33,6 +33,13 @@
         ></v-carousel-item>
       </v-carousel>
     </v-sheet>
+
+    <div style="display: inline-flex">
+      <router-link to="/products">
+        <button>PRODUCT</button>
+      </router-link>
+      <router-view />
+    </div>
   </v-app>
 </template>
 

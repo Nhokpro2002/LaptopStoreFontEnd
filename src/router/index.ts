@@ -1,7 +1,8 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomePage from "../views/HomePage.vue";
-import RegisterPage from "../views/RegisterPage.vue"; // Import RegisterPage
+import RegisterPage from "../views/RegisterPage.vue";
+import ProductPage from "../views/ProductPage.vue";
 
 Vue.use(VueRouter);
 
@@ -14,7 +15,12 @@ const routes: Array<RouteConfig> = [
   {
     path: "/register",
     name: "register",
-    component: RegisterPage, // Thêm route cho trang đăng ký
+    component: RegisterPage,
+  },
+  {
+    path: "/products",
+    name: "products",
+    component: ProductPage,
   },
 ];
 
