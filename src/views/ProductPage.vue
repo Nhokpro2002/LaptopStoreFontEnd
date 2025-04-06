@@ -6,49 +6,59 @@
         v-for="product in products"
         :key="product.productName"
         class="product-card"
+        @click="selectProduct(product)"
       >
         <img
-          :src="product.imageUrl"
+          :src="getFullImageUrl(product.imageUrl)"
           :alt="product.productName"
           class="product-image"
         />
         <h2>{{ product.productName }}</h2>
-        <p>Price: ${{ product.sellingPrice }}</p>
-        <p>Description: {{ product.description }}</p>
-        <p>Category: {{ product.category }}</p>
       </div>
     </div>
     <p v-else>Loading products...</p>
+    <ProductDetail v-if="selectedProduct" :product="selectedProduct" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
+import ProductDetail from "./ProductDetail.vue";
+
+interface Product {
+  productName: string;
+  description: string;
+  sellingPrice: string;
+  category: string;
+  imageUrl: string;
+}
 
 export default Vue.extend({
+  components: {
+    ProductDetail,
+  },
   data() {
     return {
-      products: [] as {
-        productName: string;
-        description: string;
-        sellingPrice: string;
-        category: string;
-        imageUrl: string;
-      }[],
+      products: [] as Product[],
+      selectedProduct: null as Product | null,
     };
   },
   async created() {
     try {
       const response = await axios.get("/api/products");
-      console.log("Products from API:", response.data.data);
       this.products = response.data.data;
-      this.products.forEach((product) => {
-        console.log("Image Url:", product.imageUrl);
-      });
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+  },
+  methods: {
+    selectProduct(product: Product) {
+      this.selectedProduct = product;
+    },
+    getFullImageUrl(path: string) {
+      return `http://localhost:8080${path}`;
+    },
   },
 });
 </script>
