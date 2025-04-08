@@ -1,76 +1,87 @@
 <template>
-  <v-container>
-    <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
-        <v-card>
-          <v-card-title class="headline">Register</v-card-title>
-          <v-card-text>
-            <v-form v-model="valid" @submit.prevent="onSubmit">
-              <v-text-field
-                v-model="user.name"
-                label="Name"
-                :rules="[rules.required]"
-                required
-              />
-              <v-text-field
-                v-model="user.email"
-                label="Email"
-                :rules="[rules.required, rules.email]"
-                required
-              />
-              <v-text-field
-                v-model="user.password"
-                label="Password"
-                :type="passwordVisible ? 'text' : 'password'"
-                :rules="[rules.required, rules.password]"
-                required
-                append-icon="mdi-eye"
-                @click:append="togglePasswordVisibility"
-              />
-              <v-btn :disabled="!valid" color="primary" type="submit" block>
-                Register
-              </v-btn>
-            </v-form>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-app>
+    <v-main class="register-page">
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <v-col cols="12" sm="8" md="6" lg="4">
+            <v-card elevation="12" class="pa-4 rounded-xl">
+              <v-card-title class="headline justify-center text-primary">
+                User Registration
+              </v-card-title>
+              <v-card-text>
+                <v-form @submit.prevent="submitForm" ref="form">
+                  <v-text-field
+                    label="First Name"
+                    v-model="form.firstName"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="Last Name"
+                    v-model="form.lastName"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="Address"
+                    v-model="form.address"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="Username"
+                    v-model="form.username"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="Email"
+                    v-model="form.email"
+                    type="email"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    label="Password"
+                    v-model="form.password"
+                    type="password"
+                    required
+                  ></v-text-field>
+                  <v-btn class="mt-4" color="primary" block type="submit">
+                    Register
+                  </v-btn>
+                </v-form>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      valid: false,
-      passwordVisible: false,
-      user: {
-        name: "",
+      form: {
+        firstName: "",
+        lastName: "",
+        address: "",
+        username: "",
         email: "",
         password: "",
-      },
-      rules: {
-        required: (value) => !!value || "This field is required",
-        email: (value) => /.+@.+\..+/.test(value) || "E-mail must be valid",
-        password: (value) =>
-          value.length >= 6 || "Password must be at least 6 characters",
       },
     };
   },
   methods: {
-    togglePasswordVisibility() {
-      this.passwordVisible = !this.passwordVisible;
-    },
-    onSubmit() {
-      // Handle the registration logic (e.g., send data to backend)
-      console.log("User Data:", this.user);
-      // Optionally, reset the form after successful submission
-      this.$refs.form.reset();
+    submitForm() {
+      // You can replace this with actual logic
+      console.log("Submitted form:", this.form);
     },
   },
 };
 </script>
 
 <style scoped>
-/* Add any custom styles here */
+.register-page {
+  background-color: #e3f2fd; /* Light blue background */
+  min-height: 100vh;
+  padding-top: 40px;
+}
 </style>
