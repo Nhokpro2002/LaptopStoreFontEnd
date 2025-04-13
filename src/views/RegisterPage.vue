@@ -63,7 +63,7 @@ export default {
         firstName: "",
         lastName: "",
         address: "",
-        username: "",
+        userName: "",
         email: "",
         password: "",
       },
@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     submitForm() {
-      // You can replace this with actual logic
       console.log("Submitted form:", this.form);
     },
   },

@@ -28,16 +28,6 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  props: {
-    visible: Boolean,
-  },
-});
-</script>
-
 <style scoped>
 .category-screen {
   position: fixed;
@@ -63,3 +53,13 @@ span:hover {
   color: red;
 }
 </style>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  props: {
+    visible: Boolean,
+  },
+});
+</script>

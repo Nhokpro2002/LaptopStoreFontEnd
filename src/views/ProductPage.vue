@@ -21,6 +21,21 @@
   </div>
 </template>
 
+<style scoped>
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+</style>
+
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
@@ -62,18 +77,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style scoped>
-.product-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-}
-
-.product-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-</style>

@@ -34,6 +34,14 @@
   </v-app>
 </template>
 
+<style scoped>
+.login-page {
+  background-color: #f3e5f5; /* Light purple background */
+  min-height: 100vh;
+  padding-top: 40px;
+}
+</style>
+
 <script>
 export default {
   data() {
@@ -52,11 +60,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.login-page {
-  background-color: #f3e5f5; /* Light purple background */
-  min-height: 100vh;
-  padding-top: 40px;
-}
-</style>
