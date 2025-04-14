@@ -12,12 +12,12 @@
                 <v-form @submit.prevent="submitLogin" ref="form">
                   <v-text-field
                     label="Username"
-                    v-model="login.username"
+                    v-model="form.userName"
                     required
                   ></v-text-field>
                   <v-text-field
                     label="Password"
-                    v-model="login.password"
+                    v-model="form.userPassword"
                     type="password"
                     required
                   ></v-text-field>
@@ -42,21 +42,34 @@
 }
 </style>
 
-<script>
-export default {
+<script lang="ts">
+import { AxiosError } from "axios";
+import { defineComponent } from "vue";
+import { login, UserLoginRequest } from "@/services/UserService";
+export default defineComponent({
   data() {
     return {
-      login: {
-        username: "",
-        password: "",
-      },
+      form: {
+        userName: "",
+        userPassword: "",
+      } as UserLoginRequest,
     };
   },
   methods: {
-    submitLogin() {
+    async submitLogin() {
       // Handle login logic here
-      console.log("Logging in with:", this.login);
+      try {
+        const response = await login(this.form);
+        const token = response.data.data.token;
+        console.log(token);
+        localStorage.setItem("token", token);
+        this.$router.push("/home_page");
+        alert(response.data.message);
+      } catch (error) {
+        const err = error as AxiosError;
+        alert("Lỗi khi đăng ký: " + err.message);
+      }
     },
   },
-};
+});
 </script>

@@ -11,13 +11,13 @@ Vue.use(VueRouter);
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "home",
-    component: HomePage,
-  },
-  {
-    path: "/register",
     name: "register",
     component: RegisterPage,
+  },
+  {
+    path: "/home_page",
+    name: "home_page",
+    component: HomePage,
   },
   {
     path: "/products",

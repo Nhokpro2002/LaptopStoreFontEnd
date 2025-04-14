@@ -38,7 +38,7 @@
                   ></v-text-field>
                   <v-text-field
                     label="Password"
-                    v-model="form.password"
+                    v-model="form.userPassword"
                     type="password"
                     required
                   ></v-text-field>
@@ -56,8 +56,9 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
+import { AxiosError } from "axios";
 import { defineComponent } from "vue";
+import { register, UserRegisterRequest } from "@/services/UserService";
 
 export default defineComponent({
   data() {
@@ -68,27 +69,19 @@ export default defineComponent({
         address: "",
         userName: "",
         email: "",
-        password: "",
-      },
+        userPassword: "",
+      } as UserRegisterRequest,
     };
   },
   methods: {
     async submitForm() {
       try {
-        const response = await axios.post("/api/users/register", {
-          email: this.form.email,
-          lastName: this.form.lastName,
-          firstName: this.form.firstName,
-          userName: this.form.userName,
-          userPassword: this.form.password,
-          userRole: "CUSTOMER",
-          address: this.form.address,
-        });
-        alert(console.log(response.data.data || "Đăng ký thành công"));
-      } catch (error: any) {
-        alert(
-          "Lỗi khi đăng ký: " + (error.response?.data?.message || error.message)
-        );
+        const response = await register(this.form);
+        this.$router.push("/login");
+        alert(response.data.message);
+      } catch (error) {
+        const err = error as AxiosError;
+        alert("Lỗi khi đăng ký: " + err.message);
       }
     },
   },

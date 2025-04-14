@@ -38,8 +38,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "axios";
 import ProductDetailPage from "./ProductDetailPage.vue";
+import api from "@/services/api";
 
 interface Product {
   productName: string;
@@ -61,7 +61,7 @@ export default Vue.extend({
   },
   async created() {
     try {
-      const response = await axios.get("/api/products");
+      const response = await api.get("/products");
       this.products = response.data.data;
     } catch (error) {
       console.error("Error fetching products:", error);
