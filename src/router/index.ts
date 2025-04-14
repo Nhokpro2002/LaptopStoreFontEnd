@@ -5,6 +5,7 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import TestPage from "../views/TestPage.vue";
+import AdminPage from "../views/AdminPage.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes: Array<RouteConfig> = [
     path: "/test",
     name: "test",
     component: TestPage,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminPage,
   },
 ];
 
