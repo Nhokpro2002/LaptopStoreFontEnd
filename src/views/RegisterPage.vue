@@ -84,7 +84,7 @@ export default defineComponent({
           userRole: "CUSTOMER",
           address: this.form.address,
         });
-        alert(response.data.data || "Đăng ký thành công");
+        alert(console.log(response.data.data || "Đăng ký thành công"));
       } catch (error: any) {
         alert(
           "Lỗi khi đăng ký: " + (error.response?.data?.message || error.message)
