@@ -26,8 +26,8 @@
                     required
                   ></v-text-field>
                   <v-text-field
-                    label="Username"
-                    v-model="form.username"
+                    label="UserName"
+                    v-model="form.userName"
                     required
                   ></v-text-field>
                   <v-text-field
@@ -55,8 +55,11 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import axios from "axios";
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data() {
     return {
       form: {
@@ -70,11 +73,26 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      console.log("Submitted form:", this.form);
+    async submitForm() {
+      try {
+        const response = await axios.post("/api/users/register", {
+          email: this.form.email,
+          lastName: this.form.lastName,
+          firstName: this.form.firstName,
+          userName: this.form.userName,
+          userPassword: this.form.password,
+          userRole: "CUSTOMER",
+          address: this.form.address,
+        });
+        alert(response.data.data || "Đăng ký thành công");
+      } catch (error: any) {
+        alert(
+          "Lỗi khi đăng ký: " + (error.response?.data?.message || error.message)
+        );
+      }
     },
   },
-};
+});
 </script>
 
 <style scoped>

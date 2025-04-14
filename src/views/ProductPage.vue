@@ -17,7 +17,7 @@
       </div>
     </div>
     <p v-else>Loading products...</p>
-    <ProductDetail v-if="selectedProduct" :product="selectedProduct" />
+    <ProductDetailPage v-if="selectedProduct" :product="selectedProduct" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import ProductDetail from "./ProductDetail.vue";
+import ProductDetailPage from "./ProductDetailPage.vue";
 
 interface Product {
   productName: string;
@@ -51,7 +51,7 @@ interface Product {
 
 export default Vue.extend({
   components: {
-    ProductDetail,
+    ProductDetailPage,
   },
   data() {
     return {
