@@ -6,6 +6,7 @@ import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import TestPage from "../views/TestPage.vue";
 import AdminPage from "../views/AdminPage.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 
 Vue.use(VueRouter);
 
@@ -16,8 +17,8 @@ const routes: Array<RouteConfig> = [
     component: RegisterPage,
   },
   {
-    path: "/home_page",
-    name: "home_page",
+    path: "/homePage",
+    name: "homePage",
     component: HomePage,
   },
   {
@@ -40,10 +41,15 @@ const routes: Array<RouteConfig> = [
     name: "admin",
     component: AdminPage,
   },
+  {
+    path: "/footer",
+    name: "footer",
+    component: FooterComponent,
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history", // Dùng mode "history" để bỏ dấu "#" trên URL
+  mode: "history", 
   routes,
 });
 

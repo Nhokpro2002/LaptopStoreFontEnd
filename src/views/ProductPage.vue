@@ -39,7 +39,7 @@
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailPage from "./ProductDetailPage.vue";
-import api from "@/services/api";
+import { getProducts } from "@/services/ProductService";
 
 interface Product {
   productName: string;
@@ -61,7 +61,7 @@ export default Vue.extend({
   },
   async created() {
     try {
-      const response = await api.get("/products");
+      const response = await getProducts(); //getProducts();
       this.products = response.data.data;
     } catch (error) {
       console.error("Error fetching products:", error);

@@ -40,6 +40,8 @@
       </router-link>
       <router-view />
     </div>
+
+    <FooterComponent />
   </v-app>
 </template>
 
@@ -71,8 +73,15 @@
 }
 </style>
 
-<script>
+<script lang="ts">
+import FooterComponent from "@/components/FooterComponent.vue";
+
 export default {
+  name: "homePage",
+  components: {
+    FooterComponent,
+  },
+
   data() {
     return {
       // Array to hold the image URLs for the ads
