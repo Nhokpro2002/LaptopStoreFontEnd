@@ -19,15 +19,27 @@
             <v-icon>mdi-view-dashboard</v-icon>
             <span>Dashboard</span>
           </v-row>
-          <v-row
-            align-center
-            no-gutters
-            style="padding: 20px 0 20px 0"
-            class="navigation_item"
-          >
-            <v-icon>mdi-laptop</v-icon>
-            <span>Product</span>
-          </v-row>
+          <v-menu v-model="seen" offset-y>
+            <template v-slot:activator="{ props }">
+              <v-row
+                v-bind="props"
+                align-center
+                no-gutters
+                style="padding: 20px 0 20px 0"
+                class="navigation_item"
+                @click="clickProductTag"
+              >
+                <v-icon>mdi-laptop</v-icon>
+                <span>Product</span>
+              </v-row>
+            </template>
+
+            <v-list v-if="seen">
+              <v-list-item @click="deleteProduct">Delete Product</v-list-item>
+              <v-list-item @click="updateProduct">Update Product</v-list-item>
+              <v-list-item @click="addProduct">Add Product</v-list-item>
+            </v-list>
+          </v-menu>
           <v-row
             align-center
             no-gutters
@@ -111,6 +123,7 @@
         </v-list>
       </v-app-bar>
     </v-main>
+    <FooterComponent />
   </v-app>
 </template>
 
@@ -172,8 +185,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px; /* Nếu bạn muốn thêm kích thước chữ */
+  font-size: 12px;
+  /* Nếu bạn muốn thêm kích thước chữ */
 }
 </style>
 
-<script></script>
+<script lang="ts">
+import { defineComponent } from "vue";
+import FooterComponent from "@/components/FooterComponent.vue";
+
+export default defineComponent({
+  name: "adminPage",
+  components: {
+    FooterComponent,
+  },
+  data(): { seen: boolean } {
+    return {
+      seen: false,
+    };
+  },
+  methods: {
+    deleteProduct(): void {
+      alert("Your press delete product button");
+    },
+    updateProduct(): void {
+      alert("Your press update product button");
+    },
+    addProduct(): void {
+      alert("Your press add product button");
+    },
+    clickProductTag(): void {
+      this.seen = !this.seen;
+    },
+  },
+});
+</script>

@@ -7,6 +7,7 @@ import LoginPage from "../views/LoginPage.vue";
 import TestPage from "../views/TestPage.vue";
 import AdminPage from "../views/AdminPage.vue";
 import FooterComponent from "../components/FooterComponent.vue";
+import ProductPageAdmin from "../components/ProductPageAdmin.vue";
 
 Vue.use(VueRouter);
 
@@ -46,10 +47,15 @@ const routes: Array<RouteConfig> = [
     name: "footer",
     component: FooterComponent,
   },
+  {
+    path: "/productPageAdmin",
+    name: "productPageAdmin",
+    component: ProductPageAdmin,
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history", 
+  mode: "history",
   routes,
 });
 
