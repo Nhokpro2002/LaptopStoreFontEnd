@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <!-- Navigation Bar -->
+    <HeaderComponent />
+    <!--
     <v-app-bar app color="grey darken-4" dark>
       <v-toolbar-title>Laptop Store</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -20,6 +21,7 @@
         <v-icon>mdi-cart</v-icon>
       </v-btn>
     </v-app-bar>
+    -->
 
     <!-- Content Section with Gradient Background -->
     <v-sheet class="gradient-background">
@@ -75,11 +77,13 @@
 
 <script lang="ts">
 import FooterComponent from "@/components/FooterComponent.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
 
 export default {
   name: "homePage",
   components: {
     FooterComponent,
+    HeaderComponent,
   },
 
   data() {

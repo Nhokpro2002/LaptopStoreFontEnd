@@ -1,45 +1,37 @@
 <template>
-  <div>
-    <h1>Product List</h1>
-    <div v-if="products.length">
-      <div
-        v-for="product in products"
-        :key="product.productName"
-        class="product-card"
-        @click="selectProduct(product)"
-      >
-        <img
-          :src="getFullImageUrl(product.imageUrl)"
-          :alt="product.productName"
-          class="product-image"
-        />
-        <h2>{{ product.productName }}</h2>
-      </div>
+  <v-app>
+    <div>
+      <HeaderComponent />
     </div>
-    <p v-else>Loading products...</p>
-    <ProductDetailPage v-if="selectedProduct" :product="selectedProduct" />
-  </div>
+    <div>
+      <h1 class="mb-4">Product List Admin</h1>
+      <div v-if="products.length">
+        <v-container fluid>
+          <v-row>
+            <v-col
+              v-for="product in products"
+              :key="product.productName"
+              cols="12"
+              md="6"
+              lg="4"
+            >
+              <ProductDetailPage :product="product" />
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+      <p v-else>Loading products...</p>
+      <FooterComponent />
+    </div>
+  </v-app>
 </template>
-
-<style scoped>
-.product-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-}
-
-.product-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-</style>
 
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailPage from "./ProductDetailPage.vue";
+import FooterComponent from "../components/FooterComponent.vue";
 import { getProducts } from "@/services/ProductService";
+import HeaderComponent from "../components/HeaderComponent.vue";
 
 interface Product {
   productName: string;
@@ -50,13 +42,15 @@ interface Product {
 }
 
 export default Vue.extend({
+  name: "homePage",
   components: {
     ProductDetailPage,
+    FooterComponent,
+    HeaderComponent,
   },
   data() {
     return {
       products: [] as Product[],
-      selectedProduct: null as Product | null,
     };
   },
   async created() {
@@ -66,14 +60,6 @@ export default Vue.extend({
     } catch (error) {
       console.error("Error fetching products:", error);
     }
-  },
-  methods: {
-    selectProduct(product: Product) {
-      this.selectedProduct = product;
-    },
-    getFullImageUrl(path: string) {
-      return `http://localhost:8080${path}`;
-    },
   },
 });
 </script>
