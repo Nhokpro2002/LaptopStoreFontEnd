@@ -1,42 +1,79 @@
 <template>
-  <v-data-table :headers="headers" :items="products" class="elevation-1">
-    <!--<template v-slot:item="{ item }">
-      <v-img
-        :src="item.image"
-        max-width="80"
-        max-height="80"
-        cover
-        class="rounded"
-      />
-    </template> -->
-  </v-data-table>
+  <div>
+    <h1>Product List Admin</h1>
+    <div v-if="products.length">
+      <div
+        v-for="product in products"
+        :key="product.productName"
+        class="product-card"
+        @click="selectProduct(product)"
+      >
+        <img
+          :src="getFullImageUrl(product.imageUrl)"
+          :alt="product.productName"
+          class="product-image"
+        />
+        <h2>{{ product.productName }}</h2>
+      </div>
+    </div>
+    <p v-else>Loading products...</p>
+    <ProductDetailAdmin v-if="selectedProduct" :product="selectedProduct" />
+  </div>
 </template>
 
+<style scoped>
+.product-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.product-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+</style>
+
 <script lang="ts">
-export default {
+import Vue from "vue";
+import ProductDetailAdmin from "./ProductDetailAdmin.vue";
+import { getProducts } from "@/services/ProductService";
+
+interface Product {
+  productName: string;
+  description: string;
+  sellingPrice: string;
+  category: string;
+  imageUrl: string;
+}
+
+export default Vue.extend({
+  components: {
+    ProductDetailAdmin,
+  },
   data() {
     return {
-      headers: [
-        { text: "Image", value: "image" },
-        { text: "Name", value: "name" },
-        { text: "Price", value: "price" },
-      ],
-      products: [
-        {
-          id: 1,
-          name: "iPhone 15",
-          price: 999,
-          image:
-            "https://1pro.vn/wp-content/uploads/2025/03/mba13-m4-skyblue-gallery1-202503-1280x984.jpeg",
-        },
-        {
-          id: 2,
-          name: "Samsung S23",
-          price: 899,
-          image: "https://via.placeholder.com/80x80?text=Samsung",
-        },
-      ],
+      products: [] as Product[],
+      selectedProduct: null as Product | null,
     };
   },
-};
+  async created() {
+    try {
+      const response = await getProducts();
+      this.products = response.data.data;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  },
+  methods: {
+    selectProduct(product: Product) {
+      this.selectedProduct = product;
+    },
+    getFullImageUrl(path: string) {
+      return `http://localhost:8080${path}`;
+    },
+  },
+});
 </script>

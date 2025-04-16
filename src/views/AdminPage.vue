@@ -19,27 +19,17 @@
             <v-icon>mdi-view-dashboard</v-icon>
             <span>Dashboard</span>
           </v-row>
-          <v-menu v-model="seen" offset-y>
-            <template v-slot:activator="{ props }">
-              <v-row
-                v-bind="props"
-                align-center
-                no-gutters
-                style="padding: 20px 0 20px 0"
-                class="navigation_item"
-                @click="clickProductTag"
-              >
-                <v-icon>mdi-laptop</v-icon>
-                <span>Product</span>
-              </v-row>
-            </template>
-
-            <v-list v-if="seen">
-              <v-list-item @click="deleteProduct">Delete Product</v-list-item>
-              <v-list-item @click="updateProduct">Update Product</v-list-item>
-              <v-list-item @click="addProduct">Add Product</v-list-item>
-            </v-list>
-          </v-menu>
+          <v-row
+            v-bind="props"
+            align-center
+            no-gutters
+            style="padding: 20px 0 20px 0"
+            class="navigation_item"
+            @click="clickProductTag"
+          >
+            <v-icon>mdi-laptop</v-icon>
+            <span>Product</span>
+          </v-row>
           <v-row
             align-center
             no-gutters
@@ -78,10 +68,6 @@
           </v-row>
         </v-list>
       </v-container>
-
-      <v-list>
-        <!-- Menu items ở đây -->
-      </v-list>
     </v-navigation-drawer>
 
     <v-main style="padding: 0">
@@ -122,6 +108,7 @@
           </div>
         </v-list>
       </v-app-bar>
+      <router-view />
     </v-main>
     <FooterComponent />
   </v-app>
@@ -199,23 +186,12 @@ export default defineComponent({
   components: {
     FooterComponent,
   },
-  data(): { seen: boolean } {
-    return {
-      seen: false,
-    };
+  data() {
+    return {};
   },
   methods: {
-    deleteProduct(): void {
-      alert("Your press delete product button");
-    },
-    updateProduct(): void {
-      alert("Your press update product button");
-    },
-    addProduct(): void {
-      alert("Your press add product button");
-    },
     clickProductTag(): void {
-      this.seen = !this.seen;
+      this.$router.push("/admin/product");
     },
   },
 });
