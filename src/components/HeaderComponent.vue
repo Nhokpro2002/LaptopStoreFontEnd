@@ -10,18 +10,73 @@
       class="mr-4"
       style="max-width: 300px"
     ></v-text-field>
-    <v-btn text>Category</v-btn>
-    <v-btn text>Showroom Location</v-btn>
-    <v-btn text>User</v-btn>
-    <v-btn text>Support</v-btn>
-    <v-btn text>
-      <v-icon>mdi-cart</v-icon>
-    </v-btn>
+    <v-row
+      v-bind="props"
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+      @click="getProducts"
+    >
+      <v-icon>mdi-laptop</v-icon>
+      <span>Product</span>
+    </v-row>
+    <v-row
+      v-bind="props"
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+    >
+      <v-icon>mdi-comment-question-outline</v-icon>
+      <span>Question</span>
+    </v-row>
+    <v-row
+      v-bind="props"
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+    >
+      <v-icon>mdi-cart-outline</v-icon>
+      <span>Shopping-Cart</span>
+      <span>( {{ productQuantity }} )</span>
+    </v-row>
+    <v-row
+      v-bind="props"
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+    >
+      <v-icon>mdi-account-outline</v-icon>
+      <span>Account</span>
+    </v-row>
   </v-app-bar>
 </template>
-<style scoped></style>
+<style scoped>
+.navigation_item:hover {
+  cursor: pointer;
+  background-color: aqua;
+}
+</style>
 <script lang="ts">
 import { defineComponent } from "vue";
 
-export default defineComponent({});
+export default defineComponent({
+  data() {
+    return {
+      // số lượng của mỗi loại mặt hàng khác nhau trong giỏ hàng
+      productQuantity: 0,
+    };
+  },
+  methods: {
+    getProducts() {
+      this.$router.push("/products");
+    },
+    addToCart() {
+      this.productQuantity++;
+    },
+  },
+});
 </script>

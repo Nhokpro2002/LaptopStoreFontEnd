@@ -12,16 +12,17 @@
         />
       </v-col>
       <v-col cols="12" md="8">
-        <h2 class="font-weight-bold mb-2">{{ product.name }}</h2>
+        <h2 class="font-weight-bold mb-2">{{ product.productName }}</h2>
         <p class="mb-1">{{ product.description }}</p>
         <p class="mb-1">
           💰 <strong>Price:</strong> {{ product.sellingPrice }}
         </p>
-        <p class="mb-3">📦 <strong>Category:</strong> {{ product.category }}</p>
+        <p class="mb-1">📦 <strong>Stock:</strong> {{ product.stock }}</p>
+        <p class="mb-3">🏷️ <strong>Category:</strong> {{ product.category }}</p>
 
         <div class="d-flex gap-2">
-          <v-btn color="red darken-1" dark @click="onDelete">Buy Now</v-btn>
-          <v-btn color="yellow darken-1" dark @click="onUpdate"
+          <v-btn color="red darken-1" dark @click="onBuyNow">Buy Now</v-btn>
+          <v-btn color="yellow darken-1" dark @click="onAddShoppingCart"
             >Add Shopping Cart</v-btn
           >
         </div>

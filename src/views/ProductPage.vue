@@ -39,6 +39,7 @@ interface Product {
   sellingPrice: string;
   category: string;
   imageUrl: string;
+  stock: string;
 }
 
 export default Vue.extend({
