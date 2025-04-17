@@ -63,7 +63,7 @@ export default defineComponent({
         const token = response.data.data.token;
         console.log(token);
         localStorage.setItem("token", token);
-        this.$router.push("/home_page");
+        this.$router.push("/homePage");
         alert(response.data.message);
       } catch (error) {
         const err = error as AxiosError;

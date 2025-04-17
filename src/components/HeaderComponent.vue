@@ -11,7 +11,6 @@
       style="max-width: 300px"
     ></v-text-field>
     <v-row
-      v-bind="props"
       align-center
       no-gutters
       style="padding: 20px 0 20px 0"
@@ -22,7 +21,6 @@
       <span>Product</span>
     </v-row>
     <v-row
-      v-bind="props"
       align-center
       no-gutters
       style="padding: 20px 0 20px 0"
@@ -32,7 +30,6 @@
       <span>Question</span>
     </v-row>
     <v-row
-      v-bind="props"
       align-center
       no-gutters
       style="padding: 20px 0 20px 0"
@@ -44,7 +41,17 @@
       <span>( {{ productQuantity }} )</span>
     </v-row>
     <v-row
-      v-bind="props"
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+      @click="getOrder"
+    >
+      <v-icon>mdi-order-bool-ascending</v-icon>
+      <span>YourOrder</span>
+      <span>( {{ productQuantity }} )</span>
+    </v-row>
+    <v-row
       align-center
       no-gutters
       style="padding: 20px 0 20px 0"
@@ -67,7 +74,6 @@ import { defineComponent } from "vue";
 export default defineComponent({
   data() {
     return {
-      // số lượng của mỗi loại mặt hàng khác nhau trong giỏ hàng
       productQuantity: 0,
     };
   },
@@ -78,6 +84,9 @@ export default defineComponent({
     addToCart() {
       this.productQuantity++;
       this.$router.push("/shoppingCart");
+    },
+    getOrder() {
+      this.$router.push("/orders");
     },
   },
 });

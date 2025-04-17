@@ -52,7 +52,7 @@ export default defineComponent({
     async onAddToShoppingCart() {
       try {
         const response = await createProduct(this.product.productId, 1);
-        console.log(response.data.message);
+        alert(response.data.message);
       } catch (error) {
         console.log(error);
       }

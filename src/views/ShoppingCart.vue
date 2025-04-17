@@ -36,7 +36,7 @@
           <v-btn color="#d7dbdd" @click="addItems(item.productDTO.productId)"
             ><v-icon color="blue">mdi-plus-circle-outline</v-icon></v-btn
           >
-          <v-btn color="red"><v-icon>mdi-delete-outline</v-icon></v-btn>
+          <!--<v-btn color="red"><v-icon>mdi-delete-outline</v-icon></v-btn>-->
         </v-card>
       </v-col>
     </v-row>
@@ -46,6 +46,11 @@
     <div class="text-right pr-4">
       <strong class="text-h6"
         >Total Price: {{ shoppingCartDTO.totalPrice }}</strong
+      >
+    </div>
+    <div>
+      <v-btn class="background-color: blue" @click="createNewOrder"
+        >Place Order</v-btn
       >
     </div>
     <FooterComponent />
@@ -118,6 +123,10 @@ export default defineComponent({
       const response = await reduceItem(productId);
       alert(response.data.message);
       await this.getAllProduct();
+    },
+
+    createNewOrder() {
+      this.$router.push("/newOrder");
     },
   },
   mounted() {
