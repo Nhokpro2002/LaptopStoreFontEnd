@@ -34,6 +34,7 @@ import { getProducts } from "@/services/ProductService";
 import HeaderComponent from "../components/HeaderComponent.vue";
 
 interface Product {
+  productId: number;
   productName: string;
   description: string;
   sellingPrice: string;

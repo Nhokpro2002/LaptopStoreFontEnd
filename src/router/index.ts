@@ -8,6 +8,7 @@ import TestPage from "../views/TestPage.vue";
 import AdminPage from "../views/AdminPage.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import ProductPageAdmin from "../components/ProductPageAdmin.vue";
+import ShoppingCart from "../views/ShoppingCart.vue";
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,11 @@ const routes: Array<RouteConfig> = [
     path: "/productPageAdmin",
     name: "productPageAdmin",
     component: ProductPageAdmin,
+  },
+  {
+    path: "/shoppingCart",
+    name: "shoppingCart",
+    component: ShoppingCart,
   },
 ];
 

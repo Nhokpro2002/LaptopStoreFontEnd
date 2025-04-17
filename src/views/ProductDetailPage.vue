@@ -22,7 +22,7 @@
 
         <div class="d-flex gap-2">
           <v-btn color="red darken-1" dark @click="onBuyNow">Buy Now</v-btn>
-          <v-btn color="yellow darken-1" dark @click="onAddShoppingCart"
+          <v-btn color="yellow darken-1" dark @click="onAddToShoppingCart"
             >Add Shopping Cart</v-btn
           >
         </div>
@@ -32,7 +32,10 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+import { createProduct } from "@/services/ShoppingCartService";
+
+export default defineComponent({
   props: {
     product: {
       type: Object,
@@ -43,8 +46,19 @@ export default {
     getFullImageUrl(path: string) {
       return `http://localhost:8080${path}`;
     },
+    onBuyNow(): void {
+      console.log("you click button buy now");
+    },
+    async onAddToShoppingCart() {
+      try {
+        const response = await createProduct(this.product.productId, 1);
+        console.log(response.data.message);
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
-};
+});
 </script>
 
 <style scoped>

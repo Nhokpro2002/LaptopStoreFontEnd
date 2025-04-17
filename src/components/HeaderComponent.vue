@@ -37,6 +37,7 @@
       no-gutters
       style="padding: 20px 0 20px 0"
       class="navigation_item"
+      @click="addToCart"
     >
       <v-icon>mdi-cart-outline</v-icon>
       <span>Shopping-Cart</span>
@@ -76,6 +77,7 @@ export default defineComponent({
     },
     addToCart() {
       this.productQuantity++;
+      this.$router.push("/shoppingCart");
     },
   },
 });
