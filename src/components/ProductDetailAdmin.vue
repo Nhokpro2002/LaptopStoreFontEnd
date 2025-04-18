@@ -20,28 +20,73 @@
         <p class="mb-3">📦 <strong>Category:</strong> {{ product.category }}</p>
 
         <div class="d-flex gap-2">
-          <v-btn color="red darken-1" dark @click="onDelete">Delete</v-btn>
-          <v-btn color="green darken-1" dark @click="onUpdate">Update</v-btn>
+          <v-btn color="red darken-1" dark @click="onDelete(product.productId)"
+            >Delete</v-btn
+          >
+          <v-btn color="green darken-1" dark @click="toggleUpdate"
+            >Update</v-btn
+          >
         </div>
+
+        <!-- Toggle update form -->
+        <UpdatePriceComponent
+          v-if="showUpdate"
+          :visible="true"
+          @confirm-price="handlePriceUpdate()"
+        />
       </v-col>
     </v-row>
   </v-card>
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+import { deleteProduct, updateProductPrice } from "@/services/ProductService";
+import UpdatePriceComponent from "@/components/UpdatePriceComponent.vue";
+
+export default defineComponent({
+  name: "productDetailAdmin",
+  components: {
+    UpdatePriceComponent,
+  },
   props: {
     product: {
       type: Object,
       required: true,
     },
   },
+  data() {
+    return {
+      showUpdate: false,
+    };
+  },
   methods: {
     getFullImageUrl(path: string) {
       return `http://localhost:8080${path}`;
     },
+    async onDelete(productId: number) {
+      try {
+        const response = await deleteProduct(productId);
+        alert(response.data.message);
+        alert(response.data.message);
+        this.$emit("update-products");
+      } catch (error) {
+        alert("Delete product not successful");
+        console.error(error);
+      }
+    },
+    toggleUpdate() {
+      this.showUpdate = !this.showUpdate;
+    },
+    async handlePriceUpdate(sellingPrice: number, productId: number) {
+      // handle logic to update price here (call API if needed)
+      const response = await updateProductPrice(sellingPrice, productId);
+      console.log("New price received from child:", sellingPrice);
+      this.showUpdate = false;
+      this.$emit("update-products"); // refresh product list
+    },
   },
-};
+});
 </script>
 
 <style scoped>

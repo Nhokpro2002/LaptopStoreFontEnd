@@ -11,7 +11,10 @@
             md="6"
             lg="4"
           >
-            <ProductDetailAdmin :product="product" />
+            <ProductDetailAdmin
+              :product="product"
+              @update-products="loadProducts"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -42,13 +45,18 @@ export default Vue.extend({
       products: [] as Product[],
     };
   },
+  methods: {
+    async loadProducts() {
+      try {
+        const response = await getProducts();
+        this.products = response.data.data;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    },
+  },
   async created() {
-    try {
-      const response = await getProducts();
-      this.products = response.data.data;
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
+    await this.loadProducts();
   },
 });
 </script>
