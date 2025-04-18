@@ -10,6 +10,7 @@ import FooterComponent from "../components/FooterComponent.vue";
 import ProductPageAdmin from "../components/ProductPageAdmin.vue";
 import ShoppingCart from "../views/ShoppingCart.vue";
 import NewOrder from "../components/NewOrder.vue";
+import AllUser from "../components/AllUser.vue";
 
 Vue.use(VueRouter);
 
@@ -47,6 +48,10 @@ const routes: Array<RouteConfig> = [
       {
         path: "product",
         component: ProductPageAdmin,
+      },
+      {
+        path: "allUser",
+        component: AllUser,
       },
     ],
   },

@@ -62,6 +62,7 @@
             no-gutters
             style="padding: 20px 0 20px 0"
             class="navigation_item"
+            @click="passToAllUserPage"
           >
             <v-icon>mdi-account</v-icon>
             <span>User</span>
@@ -111,6 +112,7 @@
       <router-view />
     </v-main>
     <FooterComponent />
+    <router-view />
   </v-app>
 </template>
 
@@ -192,6 +194,10 @@ export default defineComponent({
   methods: {
     clickProductTag(): void {
       this.$router.push("/admin/product");
+    },
+
+    passToAllUserPage() {
+      this.$router.push("/admin/allUser");
     },
   },
 });
