@@ -50,6 +50,7 @@ export default Vue.extend({
       try {
         const response = await getProducts();
         this.products = response.data.data;
+        console.log("Loaded products:", this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }

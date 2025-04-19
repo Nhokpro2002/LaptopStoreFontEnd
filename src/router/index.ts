@@ -41,14 +41,15 @@ const routes: Array<RouteConfig> = [
     component: TestPage,
   },
   {
+    path: "/productAdmin",
+    name: "productAdmin",
+    component: ProductPageAdmin,
+  },
+  {
     path: "/admin",
     name: "admin",
     component: AdminPage,
     children: [
-      {
-        path: "product",
-        component: ProductPageAdmin,
-      },
       {
         path: "allUser",
         component: AllUser,

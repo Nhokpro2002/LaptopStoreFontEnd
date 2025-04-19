@@ -27,8 +27,6 @@
             >Update</v-btn
           >
         </div>
-
-        <!-- Toggle update form -->
         <UpdatePriceComponent
           v-if="showUpdate"
           :visible="true"

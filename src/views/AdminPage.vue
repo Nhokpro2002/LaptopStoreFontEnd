@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <v-app>
     <v-navigation-drawer app permanent class="navigation_background">
       <v-container class="pa-4">
@@ -199,6 +199,34 @@ export default defineComponent({
     passToAllUserPage() {
       this.$router.push("/admin/allUser");
     },
+  },
+});
+</script> 
+-->
+
+<template>
+  <v-app>
+    <AppbarAdmin />
+
+    <NavbarLeftAdmin />
+
+    <FooterComponent />
+  </v-app>
+</template>
+
+<style scoped></style>
+<script lang="ts">
+import { defineComponent } from "vue";
+import AppbarAdmin from "@/components/AppbarAdmin.vue";
+import FooterComponent from "@/components/FooterComponent.vue";
+import NavbarLeftAdmin from "@/components/NavbarLeftAdmin.vue";
+
+export default defineComponent({
+  name: "adminPage",
+  components: {
+    FooterComponent,
+    AppbarAdmin,
+    NavbarLeftAdmin,
   },
 });
 </script>
