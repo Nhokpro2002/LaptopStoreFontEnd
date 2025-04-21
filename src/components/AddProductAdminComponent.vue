@@ -7,6 +7,21 @@
             ADD PRODUCT
           </v-card-title>
           <v-card-text>
+            <!-- Upload Image -->
+            <v-form @submit.prevent="uploadImage" class="mb-4">
+              <v-file-input
+                label="Choose Image"
+                v-model="imageFile"
+                accept="image/*"
+                prepend-icon="mdi-image"
+                required
+              ></v-file-input>
+              <v-btn type="submit" color="primary" class="mt-2" block
+                >Upload</v-btn
+              >
+            </v-form>
+
+            <!-- Product Info -->
             <v-form @submit.prevent="submitForm" ref="form">
               <v-text-field
                 label="Product Name"
@@ -38,20 +53,7 @@
                 v-model="product.category"
                 required
               ></v-text-field>
-              <v-file-input
-                label="Choose Image"
-                v-model="imageFile"
-                accept="image/*"
-                prepend-icon="mdi-image"
-                required
-              ></v-file-input>
-              <v-btn
-                class="mt-4"
-                color="primary"
-                block
-                type="submit"
-                @click="submitForm"
-              >
+              <v-btn class="mt-4" color="primary" block type="submit">
                 Add Product
               </v-btn>
             </v-form>
@@ -59,20 +61,9 @@
         </v-card>
       </v-col>
     </v-row>
-
-    <v-form @submit.prevent="uploadImage">
-      <v-file-input
-        label="Choose Image"
-        v-model="imageFile"
-        accept="image/*"
-        prepend-icon="mdi-image"
-        required
-      ></v-file-input>
-
-      <v-btn type="submit" color="primary" class="mt-3">Upload</v-btn>
-    </v-form>
   </v-container>
 </template>
+<style></style>
 
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -98,7 +89,6 @@ export default defineComponent({
   methods: {
     async submitForm() {
       try {
-        // TODO: Call your API here
         const response = await save(this.product);
         alert(response.data.message);
         this.$router.push("/productAdmin");
