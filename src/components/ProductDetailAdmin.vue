@@ -12,7 +12,7 @@
         />
       </v-col>
       <v-col cols="12" md="8">
-        <h2 class="font-weight-bold mb-2">{{ product.name }}</h2>
+        <h2 class="font-weight-bold mb-2">{{ product.productName }}</h2>
         <p class="mb-1">{{ product.description }}</p>
         <p class="mb-1">
           💰 <strong>Price:</strong> {{ product.sellingPrice }}
@@ -30,7 +30,9 @@
         <UpdatePriceComponent
           v-if="showUpdate"
           :visible="true"
-          @confirm-price="handlePriceUpdate()"
+          @confirm-price="
+            (newPrice) => handlePriceUpdate(newPrice, product.productId)
+          "
         />
       </v-col>
     </v-row>
@@ -65,7 +67,6 @@ export default defineComponent({
     async onDelete(productId: number) {
       try {
         const response = await deleteProduct(productId);
-        alert(response.data.message);
         alert(response.data.message);
         this.$emit("update-products");
       } catch (error) {

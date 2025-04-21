@@ -13,7 +13,7 @@ export const deleteProduct = (productId: number) => {
 };
 
 export const updateProductPrice = (sellingPrice: number, productId: number) => {
-  return api.patch("/products", {
+  return api.patch("/products", null, {
     params: {
       sellingPrice,
       productId,

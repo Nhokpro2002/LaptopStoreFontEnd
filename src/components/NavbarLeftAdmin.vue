@@ -55,8 +55,8 @@ export default Vue.extend({
           icon: "mdi-square-rounded-badge",
           route: "/admin/notification",
         },
-        { title: "User", icon: "mdi-account", route: "/admin/user" },
-        { title: "Product", icon: "mdi-laptop", route: "/productPageAdmin" },
+        { title: "User", icon: "mdi-account", route: "/userAdmin" },
+        { title: "Product", icon: "mdi-laptop", route: "/productAdmin" },
         { title: "Setting", icon: "mdi-cog", route: "/admin/setting" },
       ],
       right: null,
@@ -65,6 +65,9 @@ export default Vue.extend({
 
   methods: {
     navigateTo(route: string) {
+      this.$router.push(route);
+    },
+    getAllUser(route: string) {
       this.$router.push(route);
     },
   },

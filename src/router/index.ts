@@ -46,25 +46,31 @@ const routes: Array<RouteConfig> = [
     component: ProductPageAdmin,
   },
   {
+    path: "/userAdmin",
+    name: "userAdmin",
+    component: AllUser,
+  },
+  {
     path: "/admin",
     name: "admin",
     component: AdminPage,
-    children: [
+    /*children: [
       {
-        path: "allUser",
+        path: "user",
+        name: "user",
         component: AllUser,
       },
-    ],
+      {
+        path: "product",
+        name: "product",
+        component: ProductPageAdmin,
+      },
+    ],*/
   },
   {
     path: "/footer",
     name: "footer",
     component: FooterComponent,
-  },
-  {
-    path: "/productPageAdmin",
-    name: "productPageAdmin",
-    component: ProductPageAdmin,
   },
   {
     path: "/shoppingCart",
