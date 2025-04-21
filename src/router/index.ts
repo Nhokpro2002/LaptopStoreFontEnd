@@ -11,6 +11,7 @@ import ProductPageAdmin from "../components/ProductPageAdmin.vue";
 import ShoppingCart from "../views/ShoppingCart.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
+import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
 
 Vue.use(VueRouter);
 
@@ -54,18 +55,6 @@ const routes: Array<RouteConfig> = [
     path: "/admin",
     name: "admin",
     component: AdminPage,
-    /*children: [
-      {
-        path: "user",
-        name: "user",
-        component: AllUser,
-      },
-      {
-        path: "product",
-        name: "product",
-        component: ProductPageAdmin,
-      },
-    ],*/
   },
   {
     path: "/footer",
@@ -81,6 +70,11 @@ const routes: Array<RouteConfig> = [
     path: "/newOrder",
     name: "newOrder",
     component: NewOrder,
+  },
+  {
+    path: "/addNewProductAdmin",
+    name: "addNewProductAdmin",
+    component: AddProductAdminComponent,
   },
 ];
 

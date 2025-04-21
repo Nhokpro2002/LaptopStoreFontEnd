@@ -20,6 +20,16 @@
       </v-container>
     </div>
     <p v-else>Loading products...</p>
+    <v-btn
+      class="mx-2"
+      fab
+      dark
+      x-large
+      color="indigo"
+      @click="addNewProductPage"
+    >
+      <v-icon dark> mdi-plus </v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -55,7 +65,12 @@ export default Vue.extend({
         console.error("Error fetching products:", error);
       }
     },
+
+    addNewProductPage() {
+      this.$router.push("/addNewProductAdmin");
+    },
   },
+
   async created() {
     await this.loadProducts();
   },
