@@ -4,7 +4,7 @@
       <HeaderComponent />
     </div>
     <div>
-      <h1 class="mb-4">Product List Admin</h1>
+      <h1 class="mb-4">Product List</h1>
       <div v-if="products.length">
         <v-container fluid>
           <v-row>
@@ -22,6 +22,11 @@
       </div>
       <p v-else>Loading products...</p>
       <FooterComponent />
+    </div>
+
+    <div>
+      <v-btn @click="previousPage"> Previous page </v-btn>
+      <v-btn @click="nextPage"> Next page </v-btn>
     </div>
   </v-app>
 </template>
@@ -53,15 +58,49 @@ export default Vue.extend({
   data() {
     return {
       products: [] as Product[],
+      options: {
+        page: 1,
+        itemsPerPage: 9,
+      },
     };
   },
   async created() {
     try {
-      const response = await getProducts();
-      this.products = response.data.data;
+      const response = await getProducts(
+        this.options.page - 1,
+        this.options.itemsPerPage
+      );
+      this.products = response.data.data.content;
     } catch (error) {
       console.error("Error fetching products:", error);
     }
+  },
+
+  methods: {
+    async nextPage() {
+      this.options.page++;
+      try {
+        const response = await getProducts(
+          this.options.page - 1,
+          this.options.itemsPerPage
+        );
+        this.products = response.data.data.content;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    },
+    async previousPage() {
+      this.options.page--;
+      try {
+        const response = await getProducts(
+          this.options.page - 1,
+          this.options.itemsPerPage
+        );
+        this.products = response.data.data.content;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    },
   },
 });
 </script>

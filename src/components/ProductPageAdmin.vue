@@ -30,6 +30,18 @@
       </v-container>
     </div>
     <p v-else>Loading products...</p>
+    <v-container fluid>
+      <v-row justify="center" class="my-4">
+        <v-btn
+          @click="previousPage"
+          :disabled="options.page === 1"
+          class="mx-2"
+        >
+          Previous page
+        </v-btn>
+        <v-btn @click="nextPage" class="mx-2"> Next page </v-btn>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -53,13 +65,20 @@ export default Vue.extend({
   data() {
     return {
       products: [] as Product[],
+      options: {
+        page: 1,
+        itemsPerPage: 9,
+      },
     };
   },
   methods: {
     async loadProducts() {
       try {
-        const response = await getProducts();
-        this.products = response.data.data;
+        const response = await getProducts(
+          this.options.page,
+          this.options.itemsPerPage
+        );
+        this.products = response.data.data.content;
         console.log("Loaded products:", this.products);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -68,6 +87,16 @@ export default Vue.extend({
 
     addNewProductPage() {
       this.$router.push("/addNewProductAdmin");
+    },
+
+    previousPage() {
+      this.options.page--;
+      this.loadProducts();
+    },
+
+    nextPage() {
+      this.options.page++;
+      this.loadProducts();
     },
   },
 

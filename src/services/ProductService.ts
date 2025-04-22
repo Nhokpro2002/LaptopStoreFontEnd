@@ -10,8 +10,13 @@ export interface Product {
   imageURL: string;
 }
 
-export const getProducts = () => {
-  return api.get("/products");
+export const getProducts = (page: number, size: number) => {
+  return api.get("/products", {
+    params: {
+      page: page,
+      size: size,
+    },
+  });
 };
 
 export const deleteProduct = (productId: number) => {
