@@ -1,6 +1,16 @@
 <template>
   <div>
     <h1 class="mb-4">Product List Admin</h1>
+    <v-btn
+      class="mx-2"
+      fab
+      dark
+      x-large
+      color="indigo"
+      @click="addNewProductPage"
+    >
+      <v-icon dark> mdi-plus </v-icon>
+    </v-btn>
     <div v-if="products.length">
       <v-container fluid>
         <v-row>
@@ -20,16 +30,6 @@
       </v-container>
     </div>
     <p v-else>Loading products...</p>
-    <v-btn
-      class="mx-2"
-      fab
-      dark
-      x-large
-      color="indigo"
-      @click="addNewProductPage"
-    >
-      <v-icon dark> mdi-plus </v-icon>
-    </v-btn>
   </div>
 </template>
 

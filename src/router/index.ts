@@ -8,7 +8,7 @@ import TestPage from "../views/TestPage.vue";
 import AdminPage from "../views/AdminPage.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import ProductPageAdmin from "../components/ProductPageAdmin.vue";
-import ShoppingCart from "../views/ShoppingCart.vue";
+import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
 import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
@@ -64,7 +64,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/shoppingCart",
     name: "shoppingCart",
-    component: ShoppingCart,
+    component: ShoppingCartPage,
   },
   {
     path: "/newOrder",
