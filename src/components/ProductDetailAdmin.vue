@@ -15,7 +15,7 @@
         <h2 class="font-weight-bold mb-2">{{ product.productName }}</h2>
         <p class="mb-1">{{ product.description }}</p>
         <p class="mb-1">
-          💰 <strong>Price:</strong> {{ product.sellingPrice }}
+          💰 <strong>Price:</strong> ${{ formatePrice(product.sellingPrice) }}
         </p>
         <p class="mb-3">📦 <strong>Category:</strong> {{ product.category }}</p>
 
@@ -43,6 +43,7 @@
 import { defineComponent } from "vue";
 import { deleteProduct, updateProductPrice } from "@/services/ProductService";
 import UpdatePriceComponent from "@/components/UpdatePriceComponent.vue";
+import { formatCurrency } from "@/utils/NumberFormatter";
 
 export default defineComponent({
   name: "productDetailAdmin",
@@ -78,11 +79,13 @@ export default defineComponent({
       this.showUpdate = !this.showUpdate;
     },
     async handlePriceUpdate(sellingPrice: number, productId: number) {
-      // handle logic to update price here (call API if needed)
       const response = await updateProductPrice(sellingPrice, productId);
       console.log("New price received from child:", sellingPrice);
       this.showUpdate = false;
       this.$emit("update-products"); // refresh product list
+    },
+    formatePrice(value: string | number): string {
+      return formatCurrency(value);
     },
   },
 });

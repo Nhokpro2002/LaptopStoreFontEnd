@@ -30,18 +30,15 @@
       </v-container>
     </div>
     <p v-else>Loading products...</p>
-    <v-container fluid>
-      <v-row justify="center" class="my-4">
-        <v-btn
-          @click="previousPage"
-          :disabled="options.page === 1"
-          class="mx-2"
-        >
-          Previous page
-        </v-btn>
-        <v-btn @click="nextPage" class="mx-2"> Next page </v-btn>
-      </v-row>
-    </v-container>
+    <v-container fluid> </v-container>
+    <div class="text-center">
+      <v-pagination
+        v-model="options.page"
+        :length="10"
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+      ></v-pagination>
+    </div>
   </div>
 </template>
 
@@ -62,6 +59,9 @@ export default Vue.extend({
   components: {
     ProductDetailAdmin,
   },
+  watch: {
+    "options.page": "loadProducts",
+  },
   data() {
     return {
       products: [] as Product[],
@@ -75,7 +75,7 @@ export default Vue.extend({
     async loadProducts() {
       try {
         const response = await getProducts(
-          this.options.page,
+          this.options.page - 1,
           this.options.itemsPerPage
         );
         this.products = response.data.data.content;
@@ -87,16 +87,6 @@ export default Vue.extend({
 
     addNewProductPage() {
       this.$router.push("/addNewProductAdmin");
-    },
-
-    previousPage() {
-      this.options.page--;
-      this.loadProducts();
-    },
-
-    nextPage() {
-      this.options.page++;
-      this.loadProducts();
     },
   },
 

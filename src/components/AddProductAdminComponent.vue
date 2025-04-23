@@ -48,11 +48,18 @@
                 v-model="product.stock"
                 required
               ></v-text-field>
-              <v-text-field
-                label="Category"
-                v-model="product.category"
-                required
-              ></v-text-field>
+              <v-radio-group v-model="product.category">
+                <v-row>
+                  <v-col
+                    v-for="option in categoryOptions"
+                    :key="option"
+                    cols="12"
+                    sm="6"
+                  >
+                    <v-radio :label="option" :value="option" color="blue" />
+                  </v-col>
+                </v-row>
+              </v-radio-group>
               <v-btn class="mt-4" color="primary" block type="submit">
                 Add Product
               </v-btn>
@@ -84,6 +91,15 @@ export default defineComponent({
         imageURL: "",
       } as Product,
       imageFile: null,
+      category: "",
+      categoryOptions: [
+        "GAMING_MOUSE",
+        "KEYBOARD",
+        "LAPTOP_GAMING",
+        "LAPTOP_OFFICE",
+        "SSD",
+        "SCREEN",
+      ],
     };
   },
   methods: {
