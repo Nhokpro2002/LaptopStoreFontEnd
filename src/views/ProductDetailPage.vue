@@ -15,7 +15,7 @@
         <h2 class="font-weight-bold mb-2">{{ product.productName }}</h2>
         <p class="mb-1">{{ product.description }}</p>
         <p class="mb-1">
-          💰 <strong>Price:</strong> {{ product.sellingPrice }}
+          💰 <strong>Price:</strong> ${{ formatPrice(product.sellingPrice) }}
         </p>
         <p class="mb-1">📦 <strong>Stock:</strong> {{ product.stock }}</p>
         <p class="mb-3">🏷️ <strong>Category:</strong> {{ product.category }}</p>
@@ -34,6 +34,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { createProduct } from "@/services/ShoppingCartService";
+import { formatCurrency } from "@/utils/NumberFormatter";
 
 export default defineComponent({
   props: {
@@ -56,6 +57,9 @@ export default defineComponent({
       } catch (error) {
         console.log(error);
       }
+    },
+    formatPrice(value: string | number): string {
+      return formatCurrency(value);
     },
   },
 });

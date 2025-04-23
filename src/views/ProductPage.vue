@@ -24,9 +24,13 @@
       <FooterComponent />
     </div>
 
-    <div>
-      <v-btn @click="previousPage"> Previous page </v-btn>
-      <v-btn @click="nextPage"> Next page </v-btn>
+    <div class="text-center">
+      <v-pagination
+        v-model="options.page"
+        :length="10"
+        prev-icon="mdi-menu-left"
+        next-icon="mdi-menu-right"
+      ></v-pagination>
     </div>
   </v-app>
 </template>
@@ -55,6 +59,7 @@ export default Vue.extend({
     FooterComponent,
     HeaderComponent,
   },
+
   data() {
     return {
       products: [] as Product[],
@@ -64,6 +69,11 @@ export default Vue.extend({
       },
     };
   },
+
+  watch: {
+    "options.page": "loadProduct",
+  },
+
   async created() {
     try {
       const response = await getProducts(
@@ -77,20 +87,7 @@ export default Vue.extend({
   },
 
   methods: {
-    async nextPage() {
-      this.options.page++;
-      try {
-        const response = await getProducts(
-          this.options.page - 1,
-          this.options.itemsPerPage
-        );
-        this.products = response.data.data.content;
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    },
-    async previousPage() {
-      this.options.page--;
+    async loadProduct() {
       try {
         const response = await getProducts(
           this.options.page - 1,
