@@ -4,7 +4,6 @@ import HomePage from "../views/HomePage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
-import TestPage from "../views/TestPage.vue";
 import AdminPage from "../views/AdminPage.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import ProductPageAdmin from "../components/ProductPageAdmin.vue";
@@ -12,6 +11,7 @@ import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
 import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
+import ProductPageByCategory from "../views/ProductPageByCategory.vue";
 
 Vue.use(VueRouter);
 
@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
     path: "/register",
     name: "register",
     component: RegisterPage,
+  },
+  {
+    path: "/productPageByCategory",
+    name: "productPageByCategory",
+    component: ProductPageByCategory,
   },
   {
     path: "/homePage",
@@ -35,11 +40,6 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "login",
     component: LoginPage,
-  },
-  {
-    path: "/test",
-    name: "test",
-    component: TestPage,
   },
   {
     path: "/productAdmin",

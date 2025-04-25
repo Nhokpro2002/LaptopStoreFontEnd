@@ -10,11 +10,35 @@ export interface Product {
   imageURL: string;
 }
 
+export enum Category {
+  GAMING_MOUSE = "GAMING_MOUSE",
+  KEYBOARD = "KEYBOARD",
+  LAPTOP = "LAPTOP",
+  SCREEN = "SCREEN",
+  SSD = "SSD",
+  LAPTOP_GAMING = "LAPTOP_GAMING",
+  LAPTOP_OFFICE = "LAPTOP_OFFICE",
+}
+
 export const getProducts = (page: number, size: number) => {
   return api.get("/products", {
     params: {
       page: page,
       size: size,
+    },
+  });
+};
+
+export const getProductByCategory = (
+  page: number,
+  size: number,
+  productCategory: Category
+) => {
+  return api.get("/products/category", {
+    params: {
+      page: page,
+      size: size,
+      productCategory,
     },
   });
 };
