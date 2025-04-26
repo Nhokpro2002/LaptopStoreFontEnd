@@ -27,7 +27,7 @@
     <div class="text-center">
       <v-pagination
         v-model="options.page"
-        :length="10"
+        :length="mount()"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
       ></v-pagination>
@@ -39,7 +39,7 @@
 import Vue from "vue";
 import ProductDetailPage from "./ProductDetailPage.vue";
 import FooterComponent from "../components/FooterComponent.vue";
-import { getProducts } from "@/services/ProductService";
+import { getProducts, countNumberItems } from "@/services/ProductService";
 import HeaderComponent from "../components/HeaderComponent.vue";
 
 interface Product {
@@ -63,6 +63,7 @@ export default Vue.extend({
   data() {
     return {
       products: [] as Product[],
+      totalItems: 0,
       options: {
         page: 1,
         itemsPerPage: 9,
@@ -75,15 +76,8 @@ export default Vue.extend({
   },
 
   async created() {
-    try {
-      const response = await getProducts(
-        this.options.page - 1,
-        this.options.itemsPerPage
-      );
-      this.products = response.data.data.content;
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
+    await this.loadProduct();
+    await this.countItems();
   },
 
   methods: {
@@ -97,6 +91,13 @@ export default Vue.extend({
       } catch (error) {
         console.error("Error fetching products:", error);
       }
+    },
+    async countItems() {
+      const response = await countNumberItems();
+      this.totalItems = response.data.data;
+    },
+    mount(): number {
+      return Math.ceil(this.totalItems / this.options.itemsPerPage);
     },
   },
 });
