@@ -29,6 +29,10 @@ export const getProducts = (page: number, size: number) => {
   });
 };
 
+export const countNumberItems = () => {
+  return api.get("/products/size");
+};
+
 export const getProductByCategory = (
   page: number,
   size: number,

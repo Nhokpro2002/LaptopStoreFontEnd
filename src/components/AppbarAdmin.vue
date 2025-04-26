@@ -10,11 +10,6 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Collapsing Bar</v-toolbar-title>
-      <v-toolbar-title>Collapsing Bar</v-toolbar-title>
-      <v-toolbar-title>Collapsing Bar</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
       <v-checkbox
         v-model="collapseOnScroll"
         color="white"
@@ -26,7 +21,7 @@
       class="overflow-y-auto"
       max-height="600"
     >
-      <v-container style="height: 1000px"></v-container>
+      <v-container style="height: 65px"></v-container>
     </v-sheet>
   </v-card>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="grey darken-4" dark>
+  <v-app-bar app color="#1f2833" dark>
     <v-toolbar-title>Laptop Store</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-text-field
@@ -17,7 +17,7 @@
       class="navigation_item"
       @click="getProducts"
     >
-      <v-icon>mdi-laptop</v-icon>
+      <v-icon color="#66fcf1">mdi-laptop</v-icon>
       <span>Product</span>
     </v-row>
     <v-row
@@ -26,7 +26,7 @@
       style="padding: 20px 0 20px 0"
       class="navigation_item"
     >
-      <v-icon>mdi-comment-question-outline</v-icon>
+      <v-icon color="#66fcf1">mdi-comment-question-outline</v-icon>
       <span>Question</span>
     </v-row>
     <v-row
@@ -36,9 +36,8 @@
       class="navigation_item"
       @click="addToCart"
     >
-      <v-icon>mdi-cart-outline</v-icon>
+      <v-icon color="#66fcf1">mdi-cart-outline</v-icon>
       <span>Shopping-Cart</span>
-      <span>( {{ productQuantity }} )</span>
     </v-row>
     <v-row
       align-center
@@ -47,9 +46,8 @@
       class="navigation_item"
       @click="getOrder"
     >
-      <v-icon>mdi-order-bool-ascending</v-icon>
+      <v-icon color="#66fcf1">mdi-order-bool-ascending</v-icon>
       <span>YourOrder</span>
-      <span>( {{ productQuantity }} )</span>
     </v-row>
     <v-row
       align-center
@@ -58,7 +56,7 @@
       class="navigation_item"
       @click="changeAdminPage"
     >
-      <v-icon>mdi-account-outline</v-icon>
+      <v-icon color="#66fcf1">mdi-account-outline</v-icon>
       <span>Account</span>
     </v-row>
   </v-app-bar>

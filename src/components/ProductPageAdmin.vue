@@ -34,7 +34,7 @@
     <div class="text-center">
       <v-pagination
         v-model="options.page"
-        :length="10"
+        :length="mount()"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
       ></v-pagination>
@@ -45,7 +45,7 @@
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailAdmin from "./ProductDetailAdmin.vue";
-import { getProducts } from "@/services/ProductService";
+import { getProducts, countNumberItems } from "@/services/ProductService";
 
 interface Product {
   productName: string;
@@ -65,6 +65,7 @@ export default Vue.extend({
   data() {
     return {
       products: [] as Product[],
+      totalItems: 0,
       options: {
         page: 1,
         itemsPerPage: 9,
@@ -84,13 +85,21 @@ export default Vue.extend({
         console.error("Error fetching products:", error);
       }
     },
+    mount(): number {
+      return Math.ceil(this.totalItems / this.options.itemsPerPage);
+    },
 
     addNewProductPage() {
       this.$router.push("/addNewProductAdmin");
     },
+    async countPage() {
+      const response = await countNumberItems();
+      this.totalItems = response.data.data;
+    },
   },
 
   async created() {
+    await this.countPage();
     await this.loadProducts();
   },
 });

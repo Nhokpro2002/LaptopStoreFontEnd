@@ -44,15 +44,11 @@
 
 <style scoped>
 .gradient-background {
-  background: linear-gradient(
-    to bottom,
-    #cfd8dc,
-    #eceff1
-  ); /* Gradient from light gray to lighter gray */
+  background: linear-gradient(to bottom, #cfd8dc, #eceff1);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full screen height */
+  height: 100vh;
 }
 
 .carousel-container {
