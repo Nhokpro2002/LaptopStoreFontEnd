@@ -41,3 +41,7 @@ export const login = (userLoginRequest: UserLoginRequest) => {
 export const getAllUser = () => {
   return api.get("/users");
 };
+
+export const getUserQuantity = () => {
+  return api.get("/users/size");
+};

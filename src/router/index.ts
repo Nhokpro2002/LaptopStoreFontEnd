@@ -14,6 +14,7 @@ import AddProductAdminComponent from "../components/AddProductAdminComponent.vue
 import ProductPageByCategory from "../views/ProductPageByCategory.vue";
 import CustomerInfoPage from "../views/CustomerInfoPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
+import ChartWrapper from "../components/ChartWrapper.vue";
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes: Array<RouteConfig> = [
     path: "/register",
     name: "register",
     component: RegisterPage,
+  },
+  {
+    path: "/testChart",
+    name: "testChart",
+    component: ChartWrapper,
   },
   {
     path: "/dashboardAdmin",
