@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <HeaderComponent />
     <v-row dense>
       <v-col
         v-for="(item, index) in shoppingCartDTO.items"
@@ -53,7 +52,6 @@
         >Place Order</v-btn
       >
     </div>
-    <FooterComponent />
   </v-container>
 </template>
 
@@ -66,8 +64,6 @@ import {
   addItem,
   reduceItem,
 } from "@/services/ShoppingCartService";
-import HeaderComponent from "../components/HeaderComponent.vue";
-import FooterComponent from "../components/FooterComponent.vue";
 
 interface ShoppingCartDTO {
   items: ShoppingCartItemDTO[];
@@ -90,10 +86,6 @@ interface ProductDTO {
 
 export default defineComponent({
   name: "shoppingCart",
-  components: {
-    HeaderComponent,
-    FooterComponent,
-  },
   data() {
     return {
       shoppingCartDTO: {

@@ -40,14 +40,21 @@ const routes: Array<RouteConfig> = [
     component: ProductPageByCategory,
   },
   {
-    path: "/homePage",
+    path: "/home-page",
     name: "homePage",
     component: HomePage,
-  },
-  {
-    path: "/products",
-    name: "products",
-    component: ProductPage,
+    children: [
+      {
+        path: "products",
+        name: "products",
+        component: ProductPage,
+      },
+      {
+        path: "shopping-cart",
+        name: "shoppingCart",
+        component: ShoppingCartPage,
+      },
+    ],
   },
   {
     path: "/login",
@@ -73,11 +80,6 @@ const routes: Array<RouteConfig> = [
     path: "/footer",
     name: "footer",
     component: FooterComponent,
-  },
-  {
-    path: "/shoppingCart",
-    name: "shoppingCart",
-    component: ShoppingCartPage,
   },
   {
     path: "/newOrder",

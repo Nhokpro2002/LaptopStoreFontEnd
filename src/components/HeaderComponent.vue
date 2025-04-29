@@ -2,6 +2,16 @@
   <v-app-bar app color="#1f2833" dark>
     <v-toolbar-title>Laptop Store</v-toolbar-title>
     <v-spacer></v-spacer>
+    <v-row
+      align-center
+      no-gutters
+      style="padding: 20px 0 20px 0"
+      class="navigation_item"
+      @click="getProducts"
+    >
+      <v-icon color="#66fcf1">mdi-home-circle</v-icon>
+      <span>Home</span>
+    </v-row>
     <v-text-field
       label="Search for laptops..."
       solo
@@ -78,11 +88,11 @@ export default defineComponent({
   },
   methods: {
     getProducts() {
-      this.$router.push("/products");
+      this.$router.push("/home-page/products");
     },
     addToCart() {
       this.productQuantity++;
-      this.$router.push("/shoppingCart");
+      this.$router.push("/home-page/shopping-cart");
     },
     getOrder() {
       this.$router.push("/orders");

@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <HeaderComponent />
-    <v-sheet class="gradient-background">
-      <!-- Image Slider for Ads -->
+    <router-view />
+    <!--<v-sheet class="gradient-background">
+      <p> Image Slider for Ads </p>
       <v-carousel cycle :interval="2000" class="carousel-container">
         <v-carousel-item
           v-for="(ad, index) in ads"
@@ -11,9 +12,9 @@
           class="carousel-image"
         ></v-carousel-item>
       </v-carousel>
-    </v-sheet>
+    </v-sheet> -->
 
-    <v-container fluid>
+    <!-- <v-container fluid>
       <v-row>
         <v-col
           v-for="image in images"
@@ -37,7 +38,7 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-container>
+    </v-container> -->
     <FooterComponent />
   </v-app>
 </template>
@@ -69,7 +70,7 @@
 <script lang="ts">
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
-import { Category } from "@/services/ProductService";
+//import { Category } from "@/services/ProductService";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -79,7 +80,7 @@ export default defineComponent({
     HeaderComponent,
   },
 
-  data() {
+  /*data() {
     return {
       // Array to hold the image URLs for the ads
       ads: [
@@ -122,14 +123,6 @@ export default defineComponent({
       ],
     };
   },
-
-  methods: {
-    handleImageClick(productCategory: Category) {
-      this.$router.push({
-        name: "productPageByCategory",
-        query: { category: productCategory.toString() },
-      });
-    },
-  },
+  */
 });
 </script>
