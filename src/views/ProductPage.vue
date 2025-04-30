@@ -38,9 +38,7 @@
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailPage from "./ProductDetailPage.vue";
-//import FooterComponent from "../components/FooterComponent.vue";
 import { getProducts, countNumberItems } from "@/services/ProductService";
-import HeaderComponent from "../components/HeaderComponent.vue";
 
 interface Product {
   productId: number;
@@ -56,8 +54,6 @@ export default Vue.extend({
   name: "homePage",
   components: {
     ProductDetailPage,
-    //FooterComponent,
-    HeaderComponent,
   },
 
   data() {

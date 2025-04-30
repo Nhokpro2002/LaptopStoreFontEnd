@@ -7,7 +7,7 @@
       no-gutters
       style="padding: 20px 0 20px 0"
       class="navigation_item"
-      @click="getProducts"
+      @click="backHomePage"
     >
       <v-icon color="#66fcf1">mdi-home-circle</v-icon>
       <span>Home</span>
@@ -95,10 +95,13 @@ export default defineComponent({
       this.$router.push("/home-page/shopping-cart");
     },
     getOrder() {
-      this.$router.push("/orders");
+      this.$router.push("/home-page/newOrder");
     },
     changeAdminPage() {
       this.$router.push("/admin");
+    },
+    backHomePage() {
+      this.$router.push("/home-page");
     },
   },
 });

@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     component: RegisterPage,
   },
   {
+    path: "/login",
+    name: "login",
+    component: LoginPage,
+  },
+  {
     path: "/testChart",
     name: "testChart",
     component: ChartWrapper,
@@ -54,12 +59,17 @@ const routes: Array<RouteConfig> = [
         name: "shoppingCart",
         component: ShoppingCartPage,
       },
+      {
+        path: "newOrder",
+        name: "newOrder",
+        component: NewOrder,
+      },
+      {
+        path: "/customerInfoPage",
+        name: "customerInfoPage",
+        component: CustomerInfoPage,
+      },
     ],
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: LoginPage,
   },
   {
     path: "/productAdmin",
@@ -77,24 +87,9 @@ const routes: Array<RouteConfig> = [
     component: AdminPage,
   },
   {
-    path: "/footer",
-    name: "footer",
-    component: FooterComponent,
-  },
-  {
-    path: "/newOrder",
-    name: "newOrder",
-    component: NewOrder,
-  },
-  {
     path: "/addNewProductAdmin",
     name: "addNewProductAdmin",
     component: AddProductAdminComponent,
-  },
-  {
-    path: "/customerInfoPage",
-    name: "customerInfoPage",
-    component: CustomerInfoPage,
   },
 ];
 

@@ -61,13 +61,11 @@ export default defineComponent({
       try {
         const response = await login(this.form);
         const token = response.data.data.token;
-        console.log(token);
         localStorage.setItem("token", token);
-        this.$router.push("/homePage");
-        alert(response.data.message);
+        this.$router.push("/home-page");
       } catch (error) {
         const err = error as AxiosError;
-        alert("Lỗi khi đăng ký: " + err.message);
+        alert("Login error: " + err.message);
       }
     },
   },
