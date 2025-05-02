@@ -64,7 +64,6 @@
       no-gutters
       style="padding: 20px 0 20px 0"
       class="navigation_item"
-      @click="changeAdminPage"
     >
       <v-icon color="#66fcf1">mdi-account-outline</v-icon>
       <span>Account</span>
@@ -96,9 +95,6 @@ export default defineComponent({
     },
     getOrder() {
       this.$router.push("/home-page/newOrder");
-    },
-    changeAdminPage() {
-      this.$router.push("/admin");
     },
     backHomePage() {
       this.$router.push("/home-page");

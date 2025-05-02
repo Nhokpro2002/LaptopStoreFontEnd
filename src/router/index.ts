@@ -5,7 +5,6 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import AdminPage from "../views/AdminPage.vue";
-import FooterComponent from "../components/FooterComponent.vue";
 import ProductPageAdmin from "../components/ProductPageAdmin.vue";
 import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";

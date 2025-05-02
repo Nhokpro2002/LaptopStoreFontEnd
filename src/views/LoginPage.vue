@@ -62,11 +62,28 @@ export default defineComponent({
         const response = await login(this.form);
         const token = response.data.data.token;
         localStorage.setItem("token", token);
-        this.$router.push("/home-page");
+        const payload = JSON.parse(this.getRoleFromToken(token.split(".")[1]));
+        //console.log(payload);
+        if (payload.UserRole[0] === "ROLE_CUSTOMER") {
+          this.$router.push("/home-page");
+          alert("Dang nhap thanh cong");
+        } else if (payload.UserRole[0] === "ROLE_ADMIN") {
+          this.$router.push("/admin");
+        } else {
+          alert("cau lenh nay khong dc chay");
+        }
       } catch (error) {
         const err = error as AxiosError;
         alert("Login error: " + err.message);
       }
+    },
+
+    getRoleFromToken(token: string): string {
+      let base64 = token.replace(/-/g, "+").replace(/_/g, "/");
+      while (base64.length % 4 !== 0) {
+        base64 += "=";
+      }
+      return atob(base64);
     },
   },
 });

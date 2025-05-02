@@ -98,7 +98,6 @@ export default defineComponent({
     async getAllProduct() {
       const response = await getAllProduct();
       this.shoppingCartDTO = response.data.data;
-      console.log("API data:", response.data.data);
     },
 
     getImageByUrl(path: string) {
@@ -108,13 +107,13 @@ export default defineComponent({
     async addItems(productId: number) {
       const response = await addItem(productId);
       alert(response.data.message);
-      await this.getAllProduct();
+      //await this.getAllProduct();
     },
 
     async reduceItems(productId: number) {
       const response = await reduceItem(productId);
       alert(response.data.message);
-      await this.getAllProduct();
+      //await this.getAllProduct();
     },
 
     createNewOrder() {
