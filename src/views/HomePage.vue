@@ -21,9 +21,6 @@ export default defineComponent({
   components: {
     FooterComponent,
     HeaderComponent,
-    //ProductPage,
-    //ProductPageByCategory,
-    //CustomerInfoPage,
   },
 
   data() {

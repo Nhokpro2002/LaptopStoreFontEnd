@@ -1,10 +1,7 @@
 <template>
   <v-app>
+    <div></div>
     <div>
-      <HeaderComponent />
-    </div>
-    <div>
-      <h1 class="mb-4">Product List</h1>
       <div v-if="products.length">
         <v-container fluid>
           <v-row>
@@ -15,19 +12,18 @@
               md="6"
               lg="4"
             >
-              <ProductDetailPage :product="product" />
+              <ProductDetailComponent :product="product" />
             </v-col>
           </v-row>
         </v-container>
       </div>
       <p v-else>Loading products...</p>
-      <FooterComponent />
     </div>
 
     <div class="text-center">
       <v-pagination
         v-model="options.page"
-        :length="10"
+        :length="mount()"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
       ></v-pagination>
@@ -37,10 +33,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ProductDetailPage from "../components/ProductDetailComponent.vue";
-import FooterComponent from "../components/FooterComponent.vue";
-import { getProductByCategory, Category } from "@/services/ProductService";
-import HeaderComponent from "../components/HeaderComponent.vue";
+import ProductDetailComponent from "../components/ProductDetailComponent.vue";
+import {
+  getProductByCategory,
+  Category,
+  countNumberItemsByCategory,
+} from "@/services/ProductService";
 
 interface Product {
   productId: number;
@@ -53,16 +51,14 @@ interface Product {
 }
 
 export default Vue.extend({
-  name: "homePage",
   components: {
-    ProductDetailPage,
-    FooterComponent,
-    HeaderComponent,
+    ProductDetailComponent,
   },
 
   data() {
     return {
       products: [] as Product[],
+      totalItemsByCategory: 0,
       options: {
         page: 1,
         itemsPerPage: 9,
@@ -83,6 +79,8 @@ export default Vue.extend({
         productCategory
       );
       this.products = response.data.data.content;
+
+      await this.countNumberItemsByCategory();
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -102,6 +100,20 @@ export default Vue.extend({
       } catch (error) {
         console.error("Error fetching products:", error);
       }
+    },
+
+    async countNumberItemsByCategory() {
+      try {
+        const productCategory = this.$route.query
+          .category as unknown as Category;
+        const response = await countNumberItemsByCategory(productCategory);
+        this.totalItemsByCategory = response.data.data;
+      } catch (error) {
+        alert("Call api error");
+      }
+    },
+    mount(): number {
+      return Math.ceil(this.totalItemsByCategory / this.options.itemsPerPage);
     },
   },
 });

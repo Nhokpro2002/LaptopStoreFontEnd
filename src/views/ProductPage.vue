@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <div>
-      <h1 class="mb-4">Product List</h1>
       <div v-if="products.length">
         <v-container fluid>
           <v-row>
@@ -47,7 +46,6 @@ interface Product {
 }
 
 export default Vue.extend({
-  name: "homePage",
   components: {
     ProductDetailPage,
   },

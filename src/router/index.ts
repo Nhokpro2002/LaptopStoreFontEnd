@@ -38,7 +38,6 @@ const routes: Array<RouteConfig> = [
 
   {
     path: "/home-page",
-    name: "homePage",
     component: HomePage,
     children: [
       {
@@ -106,7 +105,7 @@ const routes: Array<RouteConfig> = [
     ],
   },
   {
-    path: "addNewProductAdmin",
+    path: "/addNewProductAdmin",
     name: "addNewProductAdmin",
     component: AddProductAdminComponent,
   },
@@ -116,7 +115,5 @@ const router = new VueRouter({
   mode: "history",
   routes,
 });
-
-//router.beforeEach((to, from, next) => {});
 
 export default router;

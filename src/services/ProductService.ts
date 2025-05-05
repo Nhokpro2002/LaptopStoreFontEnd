@@ -33,6 +33,13 @@ export const countNumberItems = () => {
   return api.get("/products/size");
 };
 
+export const countNumberItemsByCategory = (category: Category) => {
+  return api.get("/products/category/size", {
+    params: {
+      category,
+    },
+  });
+};
 export const getProductByCategory = (
   page: number,
   size: number,

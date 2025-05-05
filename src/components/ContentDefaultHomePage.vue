@@ -1,7 +1,6 @@
 <template>
   <v-app>
     <v-sheet class="gradient-background">
-      <p>Image Slider for Ads</p>
       <v-carousel cycle :interval="2000" class="carousel-container">
         <v-carousel-item
           v-for="(ad, index) in ads"
@@ -65,16 +64,10 @@
 </style>
 
 <script lang="ts">
-//import ProductPageByCategory from "./ProductPageByCategory.vue";
 import { Category } from "@/services/ProductService";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "homePage",
-  components: {
-    //ProductPageByCategory,
-  },
-
   data() {
     return {
       // Array to hold the image URLs for the ads
@@ -117,6 +110,15 @@ export default defineComponent({
         },
       ],
     };
+  },
+
+  methods: {
+    handleImageClick(category: Category) {
+      this.$router.push({
+        name: "productPageByCategory",
+        query: { category },
+      });
+    },
   },
 });
 </script>
