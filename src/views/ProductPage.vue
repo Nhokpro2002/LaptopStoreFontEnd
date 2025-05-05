@@ -1,9 +1,6 @@
 <template>
   <v-app>
     <div>
-      <HeaderComponent />
-    </div>
-    <div>
       <h1 class="mb-4">Product List</h1>
       <div v-if="products.length">
         <v-container fluid>
@@ -21,7 +18,6 @@
         </v-container>
       </div>
       <p v-else>Loading products...</p>
-      <!--<FooterComponent />-->
     </div>
 
     <div class="text-center">
@@ -37,7 +33,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ProductDetailPage from "./ProductDetailPage.vue";
+import ProductDetailPage from "../components/ProductDetailComponent.vue";
 import { getProducts, countNumberItems } from "@/services/ProductService";
 
 interface Product {

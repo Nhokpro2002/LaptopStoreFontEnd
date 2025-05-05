@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ProductDetailPage from "./ProductDetailPage.vue";
+import ProductDetailPage from "../components/ProductDetailComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
 import { getProductByCategory, Category } from "@/services/ProductService";
 import HeaderComponent from "../components/HeaderComponent.vue";

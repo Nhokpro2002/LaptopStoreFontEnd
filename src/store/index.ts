@@ -5,14 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0,
+    user: null,
+    token: null,
   },
-  getters: {},
-  mutations: {
-    increment: (state) => {
-      state.count++;
+  getters: {
+    loggedIn: (state) => {
+      return state.user && state.token ? true : false;
     },
   },
+  mutations: {},
   actions: {},
   modules: {},
 });

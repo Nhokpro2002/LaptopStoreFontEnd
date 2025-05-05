@@ -1,20 +1,8 @@
 <template>
   <v-app>
     <HeaderComponent />
-    <router-view />
-    <!--<v-sheet class="gradient-background">
-      <p> Image Slider for Ads </p>
-      <v-carousel cycle :interval="2000" class="carousel-container">
-        <v-carousel-item
-          v-for="(ad, index) in ads"
-          :key="index"
-          :src="ad"
-          class="carousel-image"
-        ></v-carousel-item>
-      </v-carousel>
-    </v-sheet> -->
-
-    <!-- <v-container fluid>
+    <!--<router-view />-->
+    <v-container fluid>
       <v-row>
         <v-col
           v-for="image in images"
@@ -38,7 +26,20 @@
           </v-card>
         </v-col>
       </v-row>
-    </v-container> -->
+    </v-container>
+
+    <v-sheet class="gradient-background">
+      <p>Image Slider for Ads</p>
+      <v-carousel cycle :interval="2000" class="carousel-container">
+        <v-carousel-item
+          v-for="(ad, index) in ads"
+          :key="index"
+          :src="ad"
+          class="carousel-image"
+        ></v-carousel-item>
+      </v-carousel>
+    </v-sheet>
+
     <FooterComponent />
   </v-app>
 </template>
@@ -61,16 +62,19 @@
 }
 
 .carousel-image {
-  max-width: 500px; /* Set the maximum width for the images */
-  max-height: 300px; /* Set the maximum height for the images */
-  object-fit: contain; /* Ensure the images fit within the specified dimensions without being cut off */
+  max-width: 500px;
+  max-height: 300px;
+  object-fit: contain;
 }
 </style>
 
 <script lang="ts">
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
-//import { Category } from "@/services/ProductService";
+import ProductPage from "./ProductPage.vue";
+import ProductPageByCategory from "./ProductPageByCategory.vue";
+import CustomerInfoPage from "./CustomerInfoPage.vue";
+import { Category } from "@/services/ProductService";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -78,9 +82,12 @@ export default defineComponent({
   components: {
     FooterComponent,
     HeaderComponent,
+    ProductPage,
+    ProductPageByCategory,
+    CustomerInfoPage,
   },
 
-  /*data() {
+  data() {
     return {
       // Array to hold the image URLs for the ads
       ads: [
@@ -123,6 +130,5 @@ export default defineComponent({
       ],
     };
   },
-  */
 });
 </script>

@@ -1,3 +1,4 @@
+import { decodeJwt } from "@/services/JwtService";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import HomePage from "../views/HomePage.vue";
@@ -5,7 +6,7 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import AdminPage from "../views/AdminPage.vue";
-import ProductPageAdmin from "../components/ProductPageAdmin.vue";
+import ProductPageAdminComponent from "../components/ProductPageAdminComponent.vue";
 import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
@@ -33,16 +34,7 @@ const routes: Array<RouteConfig> = [
     name: "testChart",
     component: ChartWrapper,
   },
-  {
-    path: "/dashboardAdmin",
-    name: "dashboardAdmin",
-    component: DashboardAdmin,
-  },
-  {
-    path: "/productPageByCategory",
-    name: "productPageByCategory",
-    component: ProductPageByCategory,
-  },
+
   {
     path: "/home-page",
     name: "homePage",
@@ -59,34 +51,56 @@ const routes: Array<RouteConfig> = [
         component: ShoppingCartPage,
       },
       {
-        path: "newOrder",
-        name: "newOrder",
+        path: "order",
+        name: "order",
         component: NewOrder,
       },
       {
-        path: "/customerInfoPage",
+        path: "customerInfoPage",
         name: "customerInfoPage",
         component: CustomerInfoPage,
       },
+      {
+        path: "productPageByCategory",
+        name: "productPageByCategory",
+        component: ProductPageByCategory,
+      },
     ],
   },
-  {
-    path: "/productAdmin",
-    name: "productAdmin",
-    component: ProductPageAdmin,
-  },
-  {
-    path: "/userAdmin",
-    name: "userAdmin",
-    component: AllUser,
-  },
+
   {
     path: "/admin",
     name: "admin",
     component: AdminPage,
+    beforeEnter: (to, from, next) => {
+      const payloadInformation = decodeJwt();
+      console.log(payloadInformation);
+      if (payloadInformation.UserRole.includes("ROLE_ADMIN")) {
+        next();
+      } else {
+        alert("You are not an ADMIN");
+      }
+    },
+    children: [
+      {
+        path: "userAdmin",
+        name: "userAdmin",
+        component: AllUser,
+      },
+      {
+        path: "productAdmin",
+        name: "productAdmin",
+        component: ProductPageAdminComponent,
+      },
+      {
+        path: "dashboardAdmin",
+        name: "dashboardAdmin",
+        component: DashboardAdmin,
+      },
+    ],
   },
   {
-    path: "/addNewProductAdmin",
+    path: "addNewProductAdmin",
     name: "addNewProductAdmin",
     component: AddProductAdminComponent,
   },
@@ -96,5 +110,7 @@ const router = new VueRouter({
   mode: "history",
   routes,
 });
+
+//router.beforeEach((to, from, next) => {});
 
 export default router;

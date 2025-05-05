@@ -35,7 +35,6 @@
           <v-btn color="#d7dbdd" @click="addItems(item.productDTO.productId)"
             ><v-icon color="blue">mdi-plus-circle-outline</v-icon></v-btn
           >
-          <!--<v-btn color="red"><v-icon>mdi-delete-outline</v-icon></v-btn>-->
         </v-card>
       </v-col>
     </v-row>
@@ -107,13 +106,11 @@ export default defineComponent({
     async addItems(productId: number) {
       const response = await addItem(productId);
       alert(response.data.message);
-      //await this.getAllProduct();
     },
 
     async reduceItems(productId: number) {
       const response = await reduceItem(productId);
       alert(response.data.message);
-      //await this.getAllProduct();
     },
 
     createNewOrder() {

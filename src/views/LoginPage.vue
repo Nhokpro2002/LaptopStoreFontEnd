@@ -36,7 +36,7 @@
 
 <style scoped>
 .login-page {
-  background-color: #f3e5f5; /* Light purple background */
+  background-color: #f3e5f5;
   min-height: 100vh;
   padding-top: 40px;
 }
@@ -46,6 +46,7 @@
 import { AxiosError } from "axios";
 import { defineComponent } from "vue";
 import { login, UserLoginRequest } from "@/services/UserService";
+import { decodeJwt } from "@/services/JwtService";
 export default defineComponent({
   data() {
     return {
@@ -57,33 +58,23 @@ export default defineComponent({
   },
   methods: {
     async submitLogin() {
-      // Handle login logic here
       try {
         const response = await login(this.form);
         const token = response.data.data.token;
         localStorage.setItem("token", token);
-        const payload = JSON.parse(this.getRoleFromToken(token.split(".")[1]));
-        //console.log(payload);
+        const payload = decodeJwt();
         if (payload.UserRole[0] === "ROLE_CUSTOMER") {
           this.$router.push("/home-page");
-          alert("Dang nhap thanh cong");
+          alert("Login successfully");
         } else if (payload.UserRole[0] === "ROLE_ADMIN") {
           this.$router.push("/admin");
         } else {
-          alert("cau lenh nay khong dc chay");
+          alert("User not either ROLE_ADMIN or ROLE_CUSTOMER");
         }
       } catch (error) {
         const err = error as AxiosError;
         alert("Login error: " + err.message);
       }
-    },
-
-    getRoleFromToken(token: string): string {
-      let base64 = token.replace(/-/g, "+").replace(/_/g, "/");
-      while (base64.length % 4 !== 0) {
-        base64 += "=";
-      }
-      return atob(base64);
     },
   },
 });

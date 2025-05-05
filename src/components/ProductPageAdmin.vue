@@ -44,7 +44,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ProductDetailAdmin from "./ProductDetailAdmin.vue";
+import ProductDetailAdmin from "./ProductDetailAdminComponent.vue";
 import { getProducts, countNumberItems } from "@/services/ProductService";
 
 interface Product {

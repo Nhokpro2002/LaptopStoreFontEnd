@@ -87,17 +87,25 @@ export default defineComponent({
   },
   methods: {
     getProducts() {
-      this.$router.push("/home-page/products");
+      this.$router.push("/home-page/products").catch(() => {
+        console.log("you are in this page");
+      });
     },
     addToCart() {
       this.productQuantity++;
-      this.$router.push("/home-page/shopping-cart");
+      this.$router.push("/home-page/shopping-cart").catch(() => {
+        console.log("you are in this page");
+      });
     },
     getOrder() {
-      this.$router.push("/home-page/newOrder");
+      this.$router.push("/home-page/order").catch(() => {
+        console.log("you are in this page");
+      });
     },
     backHomePage() {
-      this.$router.push("/home-page");
+      this.$router.push("/home-page").catch(() => {
+        console.log("you are in this page");
+      });
     },
   },
 });

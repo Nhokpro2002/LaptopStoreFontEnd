@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <AppbarAdmin />
+    <router-view></router-view>
 
     <NavbarLeftAdmin />
 
