@@ -6,7 +6,7 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import AdminPage from "../views/AdminPage.vue";
-import ProductPageAdminComponent from "../components/ProductPageAdminComponent.vue";
+import ProductPageAdmin from "../components/ProductPageAdmin.vue";
 import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
@@ -15,6 +15,7 @@ import ProductPageByCategory from "../views/ProductPageByCategory.vue";
 import CustomerInfoPage from "../views/CustomerInfoPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
 import ChartWrapper from "../components/ChartWrapper.vue";
+import ContentDefaultHomePage from "../components/ContentDefaultHomePage.vue";
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes: Array<RouteConfig> = [
     name: "homePage",
     component: HomePage,
     children: [
+      {
+        path: "",
+        name: "contentDefaultHomePage",
+        component: ContentDefaultHomePage,
+      },
       {
         path: "products",
         name: "products",
@@ -90,7 +96,7 @@ const routes: Array<RouteConfig> = [
       {
         path: "productAdmin",
         name: "productAdmin",
-        component: ProductPageAdminComponent,
+        component: ProductPageAdmin,
       },
       {
         path: "dashboardAdmin",

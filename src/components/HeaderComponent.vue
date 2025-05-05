@@ -81,9 +81,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   data() {
-    return {
-      productQuantity: 0,
-    };
+    return {};
   },
   methods: {
     getProducts() {
@@ -92,7 +90,6 @@ export default defineComponent({
       });
     },
     addToCart() {
-      this.productQuantity++;
       this.$router.push("/home-page/shopping-cart").catch(() => {
         console.log("you are in this page");
       });
