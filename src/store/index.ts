@@ -1,19 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { ModuleUserAuthentication } from "./modules/ModulesUserAuthentication";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-    user: null,
-    token: null,
-  },
-  getters: {
-    loggedIn: (state) => {
-      return state.user && state.token ? true : false;
-    },
-  },
+  state: {},
   mutations: {},
   actions: {},
-  modules: {},
+  getters: {},
+  modules: {
+    moduleUserAuthentication: ModuleUserAuthentication,
+  },
 });

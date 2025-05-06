@@ -44,10 +44,11 @@
 
 <script lang="ts">
 import { AxiosError } from "axios";
-import { defineComponent } from "vue";
-import { login, UserLoginRequest } from "@/services/UserService";
+import { UserLoginRequest } from "@/models/UserInterface";
+import { login } from "@/services/UserService";
 import { decodeJwt } from "@/services/JwtService";
-export default defineComponent({
+import Vue from "vue";
+export default Vue.extend({
   data() {
     return {
       form: {
@@ -63,7 +64,12 @@ export default defineComponent({
         const token = response.data.data.token;
         localStorage.setItem("token", token);
         const payload = decodeJwt();
+        console.log(payload);
         if (payload.UserRole[0] === "ROLE_CUSTOMER") {
+          this.$store.dispatch("moduleUserAuthentication/userLogIn");
+          console.log(
+            this.$store.dispatch("moduleUserAuthentication/userLogIn")
+          );
           this.$router.push("/home-page");
           alert("Login successfully");
         } else if (payload.UserRole[0] === "ROLE_ADMIN") {

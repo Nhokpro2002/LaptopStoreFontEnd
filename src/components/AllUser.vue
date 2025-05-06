@@ -13,7 +13,8 @@
 <script lang="ts">
 import Vue from "vue";
 import FooterComponent from "@/components/FooterComponent.vue";
-import { getAllUser, UserDTO } from "@/services/UserService";
+import { getAllUser } from "@/services/UserService";
+import { UserDTO } from "@/models/UserInterface";
 
 export default Vue.extend({
   name: "AllUser",

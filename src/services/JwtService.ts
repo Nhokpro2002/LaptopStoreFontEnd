@@ -1,10 +1,4 @@
-export interface JwtPayload {
-  UserRole: string[];
-  exp: number;
-  iat: number;
-  sub: string;
-  userId: number;
-}
+import { JwtPayload } from "@/models/JwtPayloadInterface";
 
 export const decodeJwt = (): JwtPayload => {
   const token = localStorage.getItem("token");

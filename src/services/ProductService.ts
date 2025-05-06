@@ -1,14 +1,5 @@
 import api from "@/services/api";
-
-export interface Product {
-  productName: string;
-  description: string;
-  importingPrice: number;
-  sellingPrice: number;
-  stock: number;
-  category: string;
-  imageURL: string;
-}
+import { Product } from "@/models/ProductInterface";
 
 export enum Category {
   GAMING_MOUSE = "GAMING_MOUSE",

@@ -66,7 +66,7 @@
       class="navigation_item"
     >
       <v-icon color="#66fcf1">mdi-account-outline</v-icon>
-      <span>Account</span>
+      <span>{{ getUserName }}</span>
     </v-row>
   </v-app-bar>
 </template>
@@ -103,6 +103,12 @@ export default defineComponent({
       this.$router.push("/home-page").catch(() => {
         console.log("you are in this page");
       });
+    },
+  },
+
+  computed: {
+    getUserName(): string {
+      return this.$store.state.moduleUserAuthentication.sub;
     },
   },
 });

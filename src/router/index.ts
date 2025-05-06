@@ -39,6 +39,15 @@ const routes: Array<RouteConfig> = [
   {
     path: "/home-page",
     component: HomePage,
+    beforeEnter: (to, from, next) => {
+      const payloadInformation = decodeJwt();
+      console.log(payloadInformation);
+      if (payloadInformation.UserRole.includes("ROLE_CUSTOMER")) {
+        next();
+      } else {
+        alert("You are not a CUSTOMER");
+      }
+    },
     children: [
       {
         path: "",

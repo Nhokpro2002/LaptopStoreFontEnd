@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <h1>Info</h1>
+    <h2>{{ userName }}</h2>
+    <h2>{{ age }}</h2>
+    <div>
+      <input v-model="userNameInput" />
+      <button @click="changeUserName">Change User Name</button>
+    </div>
+    <div>
+      <div>{{ getUserName }}</div>
+      <div>{{ getAge }}</div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { mapGetters } from "vuex";
+import Vue from "vue";
+export default Vue.extend({
+  name: "InfoUser",
+  data() {
+    return {
+      userNameInput: "",
+    };
+  },
+  computed: {
+    userName(): string {
+      return this.$store.state.userName;
+    },
+    age(): number {
+      return this.$store.state.age;
+    },
+    ...mapGetters(["getUserName", "getAge"]),
+  },
+  methods: {
+    changeUserName() {
+      this.$store.dispatch("handleChangeUserName", this.userNameInput);
+    },
+  },
+});
+
+</script>
+
+<style scoped></style>

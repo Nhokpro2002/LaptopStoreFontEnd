@@ -11,9 +11,6 @@
 <script lang="ts">
 import FooterComponent from "@/components/FooterComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
-//import ProductPage from "./ProductPage.vue";
-//import ProductPageByCategory from "./ProductPageByCategory.vue";
-//import CustomerInfoPage from "./CustomerInfoPage.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

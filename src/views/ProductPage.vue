@@ -34,16 +34,7 @@
 import Vue from "vue";
 import ProductDetailPage from "../components/ProductDetailComponent.vue";
 import { getProducts, countNumberItems } from "@/services/ProductService";
-
-interface Product {
-  productId: number;
-  productName: string;
-  description: string;
-  sellingPrice: string;
-  category: string;
-  imageUrl: string;
-  stock: string;
-}
+import { Product } from "@/models/ProductInterface";
 
 export default Vue.extend({
   components: {

@@ -76,7 +76,8 @@
 import { defineComponent } from "vue";
 import { save } from "@/services/ProductService";
 import { upload } from "@/services/ImageUploadService";
-import { Product } from "@/services/ProductService";
+//import { Product } from "@/services/ProductService";
+import { Product } from "@/models/ProductInterface";
 
 export default defineComponent({
   data() {

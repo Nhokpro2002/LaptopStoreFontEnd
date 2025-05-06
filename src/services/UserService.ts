@@ -1,29 +1,7 @@
 import axios from "axios";
 import api from "@/services/api";
-
-export interface UserRegisterRequest {
-  email: string;
-  userPassword: string;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  address: string;
-}
-
-export interface UserLoginRequest {
-  userName: string;
-  userPassword: string;
-}
-
-export interface UserDTO {
-  userId: number;
-  userName: string;
-  lastName: string;
-  firstName: string;
-  email: string;
-  address: string;
-  role: string;
-}
+import { UserRegisterRequest } from "@/models/UserInterface";
+import { UserLoginRequest } from "@/models/UserInterface";
 
 export const register = (userRegisterRequest: UserRegisterRequest) => {
   return axios.post("/api/users/register", {

@@ -65,14 +65,16 @@
 
 <script lang="ts">
 import { AxiosError } from "axios";
-import { defineComponent } from "vue";
-import { register, UserRegisterRequest } from "@/services/UserService";
+import Vue from "vue";
+//import { defineComponent } from "vue";
+import { register } from "@/services/UserService";
+import { UserRegisterRequest } from "@/models/UserInterface";
 
-export default defineComponent({
+export default Vue.extend({
   data() {
     return {
+      valid: false,
       form: {
-        valid: false,
         firstName: "",
         lastName: "",
         userName: "",
@@ -122,7 +124,7 @@ export default defineComponent({
 
 <style scoped>
 .register-page {
-  background-color: #e3f2fd; /* Light blue background */
+  background-color: #e3f2fd;
   min-height: 100vh;
   padding-top: 40px;
 }
