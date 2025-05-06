@@ -1,4 +1,4 @@
-import api from "@/services/api";
+import axios from "axios";
 import { Product } from "@/models/ProductInterface";
 
 export enum Category {
@@ -12,7 +12,7 @@ export enum Category {
 }
 
 export const getProducts = (page: number, size: number) => {
-  return api.get("/products", {
+  return axios.get("/products", {
     params: {
       page: page,
       size: size,
@@ -21,11 +21,11 @@ export const getProducts = (page: number, size: number) => {
 };
 
 export const countNumberItems = () => {
-  return api.get("/products/size");
+  return axios.get("/products/size");
 };
 
 export const countNumberItemsByCategory = (category: Category) => {
-  return api.get("/products/category/size", {
+  return axios.get("/products/category/size", {
     params: {
       category,
     },
@@ -36,7 +36,7 @@ export const getProductByCategory = (
   size: number,
   productCategory: Category
 ) => {
-  return api.get("/products/category", {
+  return axios.get("/products/category", {
     params: {
       page: page,
       size: size,
@@ -46,7 +46,7 @@ export const getProductByCategory = (
 };
 
 export const deleteProduct = (productId: number) => {
-  return api.delete("/products", {
+  return axios.delete("/products", {
     params: {
       productId,
     },
@@ -54,7 +54,7 @@ export const deleteProduct = (productId: number) => {
 };
 
 export const updateProductPrice = (sellingPrice: number, productId: number) => {
-  return api.patch("/products", null, {
+  return axios.patch("/products", null, {
     params: {
       sellingPrice,
       productId,
@@ -63,7 +63,7 @@ export const updateProductPrice = (sellingPrice: number, productId: number) => {
 };
 
 export const save = (product: Product) => {
-  return api.post("/products", {
+  return axios.post("/products", {
     ...product,
   });
 };

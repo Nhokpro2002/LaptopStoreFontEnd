@@ -1,13 +1,12 @@
-import Vue from "vue";
 import axios from "axios";
 
 // Config Axios with baseURL is your backend
-const api = axios.create({
-  baseURL: "http://localhost:8080", // location backend http://localhost:8080
-  timeout: 5000,
+axios.defaults.baseURL = "http://localhost:8080";
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
-
-// Mount to call APIs
-Vue.prototype.$axios = api;
-
-export default api;

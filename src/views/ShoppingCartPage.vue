@@ -114,7 +114,7 @@ export default defineComponent({
     },
 
     createNewOrder() {
-      this.$router.push("/newOrder");
+      this.$router.push("/home-page/order");
     },
   },
   mounted() {

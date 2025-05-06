@@ -1,5 +1,5 @@
-import api from "@/services/api";
+import axios from "axios";
 
 export const upload = (formData: FormData) => {
-  return api.post("/images/upload", formData);
+  return axios.post("/images/upload", formData);
 };

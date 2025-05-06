@@ -1,7 +1,7 @@
-import api from "@/services/api";
+import axios from "axios";
 
 export const createProduct = (productId: number, quantity: number) => {
-  return api.post("/shopping-carts/items", null, {
+  return axios.post("/shopping-carts/items", null, {
     params: {
       productId,
       quantity,
@@ -10,11 +10,11 @@ export const createProduct = (productId: number, quantity: number) => {
 };
 
 export const getAllProduct = () => {
-  return api.get("/shopping-carts");
+  return axios.get("/shopping-carts");
 };
 
 export const addItem = (productId: number) => {
-  return api.patch("/shopping-carts/addition", null, {
+  return axios.patch("/shopping-carts/addition", null, {
     params: {
       productId,
     },
@@ -22,7 +22,7 @@ export const addItem = (productId: number) => {
 };
 
 export const reduceItem = (productId: number) => {
-  return api.patch("/shopping-carts/reduction", null, {
+  return axios.patch("/shopping-carts/reduction", null, {
     params: {
       productId,
     },
