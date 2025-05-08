@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AlertCustomComponent />
     <div>
       <div v-if="products.length">
         <v-container fluid>
@@ -35,10 +36,13 @@ import Vue from "vue";
 import ProductDetailPage from "../components/ProductDetailComponent.vue";
 import { getProducts, countNumberItems } from "@/services/ProductService";
 import { Product } from "@/models/ProductInterface";
+import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { alertUser } from "@/services/AlertCustomService";
 
 export default Vue.extend({
   components: {
     ProductDetailPage,
+    AlertCustomComponent,
   },
 
   data() {
@@ -69,8 +73,8 @@ export default Vue.extend({
           this.options.itemsPerPage
         );
         this.products = response.data.data.content;
-      } catch (error) {
-        console.error("Error fetching products:", error);
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
       }
     },
     async countItems() {

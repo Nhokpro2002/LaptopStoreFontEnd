@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AlertCustomComponent />
     <v-main class="register-page">
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -65,12 +66,16 @@
 
 <script lang="ts">
 import { AxiosError } from "axios";
-import Vue from "vue";
-//import { defineComponent } from "vue";
 import { register } from "@/services/UserService";
 import { UserRegisterRequest } from "@/models/UserInterface";
+import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { alertUser } from "@/services/AlertCustomService";
+import Vue from "vue";
 
 export default Vue.extend({
+  components: {
+    AlertCustomComponent,
+  },
   data() {
     return {
       valid: false,
@@ -111,11 +116,12 @@ export default Vue.extend({
     async submitForm() {
       try {
         const response = await register(this.form);
-        this.$router.push("/login");
-        alert(response.data.message);
-      } catch (error) {
-        const err = error as AxiosError;
-        alert("Lỗi khi đăng ký: " + err.message);
+        alertUser.showAlertSuccess(response.data.message);
+        setTimeout(() => this.$router.push("/login"), 1000);
+        //alert(response.data.message);
+      } catch (error: any) {
+        //alertUser.showAlertSuccess(error.response.data.message);
+        console.log(error);
       }
     },
   },

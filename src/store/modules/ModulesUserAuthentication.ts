@@ -9,7 +9,7 @@ export const ModuleUserAuthentication = {
     iat: 0,
     sub: "Account", // This is user name
     userId: 0,
-  },
+  } as JwtPayload,
   mutations: {
     // Logged in or Logged out
     userLogIn(state: JwtPayload) {

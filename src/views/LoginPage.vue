@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AlertCustomComponent />
     <v-main class="login-page">
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
@@ -43,12 +44,17 @@
 </style>
 
 <script lang="ts">
-import { AxiosError } from "axios";
 import { UserLoginRequest } from "@/models/UserInterface";
 import { login } from "@/services/UserService";
 import { decodeJwt } from "@/services/JwtService";
+import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { alertUser } from "@/services/AlertCustomService";
 import Vue from "vue";
+
 export default Vue.extend({
+  components: {
+    AlertCustomComponent,
+  },
   data() {
     return {
       form: {
@@ -62,24 +68,31 @@ export default Vue.extend({
       try {
         const response = await login(this.form);
         const token = response.data.data.token;
+
         localStorage.setItem("token", token);
+        alertUser.showAlertSuccess(response.data.message);
+
         const payload = decodeJwt();
-        console.log(payload);
-        if (payload.UserRole[0] === "ROLE_CUSTOMER") {
+        const userRole = payload.UserRole?.[0];
+
+        if (userRole === "ROLE_CUSTOMER") {
           this.$store.dispatch("moduleUserAuthentication/userLogIn");
-          console.log(
-            this.$store.dispatch("moduleUserAuthentication/userLogIn")
-          );
-          this.$router.push("/home-page");
-          alert("Login successfully");
-        } else if (payload.UserRole[0] === "ROLE_ADMIN") {
-          this.$router.push("/admin");
+          setTimeout(() => {
+            this.$router.push("/home-page");
+          }, 2000);
+        } else if (userRole === "ROLE_ADMIN") {
+          this.$store.dispatch("moduleUserAuthentication/userLogIn");
+
+          setTimeout(() => {
+            this.$router.push("/admin");
+          }, 2000);
         } else {
-          alert("User not either ROLE_ADMIN or ROLE_CUSTOMER");
+          alertUser.showAlertError(
+            "User not either ROLE_ADMIN or ROLE_CUSTOMER"
+          );
         }
-      } catch (error) {
-        const err = error as AxiosError;
-        alert("Login error: " + err.message);
+      } catch (error: any) {
+        alertUser.showAlertError("Login error: " + error.response.data.message);
       }
     },
   },
