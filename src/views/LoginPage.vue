@@ -37,9 +37,24 @@
 
 <style scoped>
 .login-page {
-  background-color: #f3e5f5;
+  background-color: #566573;
   min-height: 100vh;
   padding-top: 40px;
+}
+
+.form-login {
+  background-color: #1c2833 !important;
+}
+
+.another-login {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+a :hover {
+  color: red;
 }
 </style>
 

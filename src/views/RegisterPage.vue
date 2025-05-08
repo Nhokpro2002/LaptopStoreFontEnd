@@ -54,6 +54,16 @@
                   <v-btn class="mt-4" color="primary" block type="submit">
                     Register
                   </v-btn>
+                  <div class="another-login">
+                    <a class="link text--primary">
+                      <v-icon class="icon-facebook"> mdi-facebook </v-icon>
+                      Login with facebook</a
+                    >
+                    <a class="link text--primary">
+                      <v-icon class="icon-google"> mdi-google </v-icon>Login
+                      with google</a
+                    >
+                  </div>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -65,7 +75,6 @@
 </template>
 
 <script lang="ts">
-import { AxiosError } from "axios";
 import { register } from "@/services/UserService";
 import { UserRegisterRequest } from "@/models/UserInterface";
 import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
@@ -118,9 +127,10 @@ export default Vue.extend({
         const response = await register(this.form);
         alertUser.showAlertSuccess(response.data.message);
         setTimeout(() => this.$router.push("/login"), 1000);
-        //alert(response.data.message);
       } catch (error: any) {
-        //alertUser.showAlertSuccess(error.response.data.message);
+        alertUser.showAlertError(
+          "Register user error: " + error.response.data.message
+        );
         console.log(error);
       }
     },
@@ -130,8 +140,28 @@ export default Vue.extend({
 
 <style scoped>
 .register-page {
-  background-color: #e3f2fd;
+  background-color: #393a3b;
   min-height: 100vh;
   padding-top: 40px;
+}
+
+.another-login {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.link:hover {
+  color: red !important;
+  text-decoration-line: underline !important;
+}
+
+.icon-facebook:hover {
+  color: blue;
+}
+
+.icon-google:hover {
+  color: orange;
 }
 </style>
