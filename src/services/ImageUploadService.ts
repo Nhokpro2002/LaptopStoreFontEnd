@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const upload = (formData: FormData) => {
-  return axios.post("/images/upload", formData);
+  return axios.post("/api/api/upload-image", formData);
 };

@@ -1,9 +1,9 @@
-import axios from "axios";
+import api from "./api";
 
 export const createYourOrder = () => {
-  return axios.post("/your-orders");
+  return api.post("/your-orders");
 };
 
 export const getOrderQuantity = () => {
-  return axios.get("/your-orders/size");
+  return api.get("/your-orders/size");
 };

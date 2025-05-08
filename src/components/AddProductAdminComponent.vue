@@ -8,17 +8,18 @@
           </v-card-title>
           <v-card-text>
             <!-- Upload Image -->
-            <v-form @submit.prevent="uploadImage" class="mb-4">
+            <v-form @submit.prevent="submitForm" class="mb-4">
+              <!--<v-form class="mb-4">-->
               <v-file-input
                 label="Choose Image"
                 v-model="imageFile"
-                accept="image/*"
+                accept="api/upload-image/*"
                 prepend-icon="mdi-image"
                 required
               ></v-file-input>
-              <v-btn type="submit" color="primary" class="mt-2" block
+              <!--<v-btn type="submit" color="primary" class="mt-2" block
                 >Upload</v-btn
-              >
+              >-->
             </v-form>
 
             <!-- Product Info -->
@@ -76,7 +77,6 @@
 import { defineComponent } from "vue";
 import { save } from "@/services/ProductService";
 import { upload } from "@/services/ImageUploadService";
-//import { Product } from "@/services/ProductService";
 import { Product } from "@/models/ProductInterface";
 
 export default defineComponent({
@@ -106,9 +106,9 @@ export default defineComponent({
   methods: {
     async submitForm() {
       try {
+        await this.uploadImage();
         const response = await save(this.product);
         alert(response.data.message);
-        this.$router.push("/productAdmin");
       } catch (error) {
         console.error("Error submitting form", error);
       }
@@ -123,7 +123,8 @@ export default defineComponent({
         const formData = new FormData();
         formData.append("file", this.imageFile);
         const response = await upload(formData);
-        alert(response.data.message);
+        //alert(response.data.message);
+        console.log(response.data.data);
         this.product.imageURL = response.data.data;
       } catch (error) {
         alert(error);
@@ -135,8 +136,7 @@ export default defineComponent({
 
 <style scoped>
 .register-page {
-  background-color: #e3f2fd;
-  /* Light blue background */
+  background-color: #313639;
   min-height: 100vh;
   padding-top: 40px;
 }

@@ -32,11 +32,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import { createProduct } from "@/services/ShoppingCartService";
 import { formatCurrency } from "@/utils/NumberFormatter";
 
-export default defineComponent({
+export default Vue.extend({
   props: {
     product: {
       type: Object,

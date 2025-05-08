@@ -16,6 +16,7 @@ import CustomerInfoPage from "../views/CustomerInfoPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
 import ChartWrapper from "../components/ChartWrapper.vue";
 import ContentDefaultHomePage from "../components/ContentDefaultHomePage.vue";
+import ImageUploadTest from "../views/ImageUploadTest.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes: Array<RouteConfig> = [
     path: "/register",
     name: "register",
     component: RegisterPage,
+  },
+  {
+    path: "/test-upload-image",
+    name: "test-upload-image",
+    component: ImageUploadTest,
   },
   {
     path: "/login",

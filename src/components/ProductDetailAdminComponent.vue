@@ -40,12 +40,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+//import { defineComponent } from "vue";
+import Vue from "vue";
 import { deleteProduct, updateProductPrice } from "@/services/ProductService";
 import UpdatePriceComponent from "@/components/UpdatePriceComponent.vue";
 import { formatCurrency } from "@/utils/NumberFormatter";
 
-export default defineComponent({
+export default Vue.extend({
   name: "productDetailAdmin",
   components: {
     UpdatePriceComponent,
@@ -63,7 +64,7 @@ export default defineComponent({
   },
   methods: {
     getFullImageUrl(path: string) {
-      return `http://localhost:8080${path}`;
+      return path;
     },
     async onDelete(productId: number) {
       try {
