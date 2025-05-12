@@ -38,7 +38,6 @@ import Vue from "vue";
 import ChartWrapper from "./ChartWrapper.vue";
 import { getUserQuantity } from "@/services/UserService";
 import { getOrderQuantity } from "@/services/YourOrderService";
-import { countNumberItems } from "@/services/ProductService";
 
 export default Vue.extend({
   name: "DashboardAdmin",
@@ -61,18 +60,16 @@ export default Vue.extend({
   methods: {
     async fetchDashboardData() {
       try {
-        const [customerQuantity, orderQuantity, productQuantity] =
-          await Promise.all([
-            getUserQuantity(),
-            getOrderQuantity(),
-            countNumberItems(),
-          ]);
+        const [customerQuantity, orderQuantity] = await Promise.all([
+          getUserQuantity(),
+          getOrderQuantity(),
+        ]);
 
         this.cards = [
           { title: "Profit", value: 1000 },
           { title: "Customer", value: customerQuantity.data.data },
           { title: "Order", value: orderQuantity.data.data },
-          { title: "Product", value: productQuantity.data.data },
+          //{ title: "Product", value: productQuantity.data.data },
         ];
       } catch (error) {
         console.error("Failed to fetch dashboard data:", error);

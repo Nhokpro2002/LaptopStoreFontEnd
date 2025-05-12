@@ -55,10 +55,14 @@
                     Register
                   </v-btn>
                   <div class="another-login">
-                    <a class="link text--primary">
-                      <v-icon class="icon-facebook"> mdi-facebook </v-icon>
-                      Login with facebook</a
+                    <a
+                      href="http://localhost:8080/oauth2/authorization/facebook"
+                      class="link"
+                      >Login with Facebook</a
                     >
+                    <!--<a @click="authenticateFacebook" class="link"
+                      >Login with Facebook</a
+                    >-->
                     <a class="link text--primary">
                       <v-icon class="icon-google"> mdi-google </v-icon>Login
                       with google</a
@@ -77,8 +81,9 @@
 <script lang="ts">
 import { register } from "@/services/UserService";
 import { UserRegisterRequest } from "@/models/UserInterface";
-import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
 import { alertUser } from "@/services/AlertCustomService";
+import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { loginByFacebook } from "@/services/FacebookLoginService";
 import Vue from "vue";
 
 export default Vue.extend({
@@ -132,6 +137,14 @@ export default Vue.extend({
           "Register user error: " + error.response.data.message
         );
         console.log(error);
+      }
+    },
+    async authenticateFacebook() {
+      try {
+        const response = await loginByFacebook();
+        window.location.href = response.data.data;
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
       }
     },
   },

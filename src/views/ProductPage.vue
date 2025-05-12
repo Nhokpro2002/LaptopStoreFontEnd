@@ -23,7 +23,7 @@
     <div class="text-center">
       <v-pagination
         v-model="options.page"
-        :length="mount()"
+        :length="numberOfPages"
         prev-icon="mdi-menu-left"
         next-icon="mdi-menu-right"
       ></v-pagination>
@@ -34,10 +34,15 @@
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailPage from "../components/ProductDetailComponent.vue";
-import { getProducts, countNumberItems } from "@/services/ProductService";
-import { Product } from "@/models/ProductInterface";
 import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { Category } from "@/models/ProductInterface";
+import {
+  getProductByCategory,
+  getProductsByKeyword,
+} from "@/services/ProductService";
+import { Product } from "@/models/ProductInterface";
 import { alertUser } from "@/services/AlertCustomService";
+import emitter from "@/event_bus/eventBus";
 
 export default Vue.extend({
   components: {
@@ -48,7 +53,7 @@ export default Vue.extend({
   data() {
     return {
       products: [] as Product[],
-      totalItems: 0,
+      numberOfPages: 0,
       options: {
         page: 1,
         itemsPerPage: 9,
@@ -57,32 +62,70 @@ export default Vue.extend({
   },
 
   watch: {
-    "options.page": "loadProduct",
+    "$route.query.itemName"(
+      newCategory: string | undefined,
+      oldCategory: string | undefined
+    ) {
+      if (newCategory && newCategory !== oldCategory) {
+        this.handleGetProductsByCategory();
+      }
+    },
+    "$route.query.keyword"(
+      newKeyword: string | undefined,
+      oldKeyword: string | undefined
+    ) {
+      if (newKeyword && newKeyword !== oldKeyword) {
+        this.handleUserSerachingItem();
+      }
+    },
   },
 
-  async created() {
-    await this.loadProduct();
-    await this.countItems();
+  mounted() {
+    //emitter.on("navigate-category", this.handleGetProductsByCategory);
+    //emitter.on("searching-item", this.handleUserSerachingItem);
+    if (this.$route.query.itemName) {
+      this.handleGetProductsByCategory();
+    }
+    if (this.$route.query.keyword) {
+      this.handleUserSerachingItem();
+    }
   },
+
+  /*beforeDestroy() {
+    emitter.off("navigate-category", this.handleGetProductsByCategory);
+    emitter.off("searching-item", this.handleUserSerachingItem);
+  },*/
 
   methods: {
-    async loadProduct() {
+    async handleGetProductsByCategory() {
       try {
-        const response = await getProducts(
+        const category = this.$route.query.itemName as Category;
+        const response = await getProductByCategory(
           this.options.page - 1,
-          this.options.itemsPerPage
+          this.options.itemsPerPage,
+          category
+        );
+        this.products = response.data.data.content;
+        this.numberOfPages = Math.ceil(
+          this.products.length / this.options.itemsPerPage
+        );
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
+      }
+    },
+
+    async handleUserSerachingItem() {
+      try {
+        const keyword = this.$route.query.keyword;
+        const response = await getProductsByKeyword(
+          this.options.page - 1,
+          this.options.itemsPerPage,
+          keyword
         );
         this.products = response.data.data.content;
       } catch (error: any) {
         alertUser.showAlertError(error.response.data.message);
       }
-    },
-    async countItems() {
-      const response = await countNumberItems();
-      this.totalItems = response.data.data;
-    },
-    mount(): number {
-      return Math.ceil(this.totalItems / this.options.itemsPerPage);
     },
   },
 });

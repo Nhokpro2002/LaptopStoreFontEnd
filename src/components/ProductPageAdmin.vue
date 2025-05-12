@@ -45,7 +45,7 @@
 <script lang="ts">
 import Vue from "vue";
 import ProductDetailAdmin from "./ProductDetailAdminComponent.vue";
-import { getProducts, countNumberItems } from "@/services/ProductService";
+import { getProducts } from "@/services/ProductService";
 
 interface Product {
   productName: string;
@@ -92,14 +92,9 @@ export default Vue.extend({
     addNewProductPage() {
       this.$router.push("/addNewProductAdmin");
     },
-    async countPage() {
-      const response = await countNumberItems();
-      this.totalItems = response.data.data;
-    },
   },
 
   async created() {
-    await this.countPage();
     await this.loadProducts();
   },
 });

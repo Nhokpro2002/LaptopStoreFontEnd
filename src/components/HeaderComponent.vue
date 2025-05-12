@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <v-app-bar app color="#1f2833" dark>
     <v-toolbar-title>Laptop Store</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -28,7 +28,7 @@
       @click="getProducts"
     >
       <v-icon color="#66fcf1">mdi-laptop</v-icon>
-      <span>Product</span>
+      <span>Category</span>
     </v-row>
     <v-row
       align-center
@@ -37,7 +37,7 @@
       class="navigation_item"
     >
       <v-icon color="#66fcf1">mdi-comment-question-outline</v-icon>
-      <span>Question</span>
+      <span>Showroom System</span>
     </v-row>
     <v-row
       align-center
@@ -77,17 +77,24 @@
 }
 </style>
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
+import emitter from "@/event_bus/eventBus";
 
-export default defineComponent({
+export default Vue.extend({
   data() {
     return {};
   },
+
   methods: {
     getProducts() {
-      this.$router.push("/home-page/products").catch(() => {
-        console.log("you are in this page");
-      });
+      this.$router
+        .push("/home-page/products")
+        .then(() => {
+          emitter.emit("getProducts", { type: "all" });
+        })
+        .catch(() => {
+          console.log("you are in this page");
+        });
     },
     addToCart() {
       this.$router.push("/home-page/shopping-cart").catch(() => {
@@ -112,4 +119,4 @@ export default defineComponent({
     },
   },
 });
-</script>
+</script>-->

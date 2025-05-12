@@ -11,12 +11,11 @@ import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
 import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
-import ProductPageByCategory from "../views/ProductPageByCategory.vue";
 import CustomerInfoPage from "../views/CustomerInfoPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
 import ChartWrapper from "../components/ChartWrapper.vue";
-import ContentDefaultHomePage from "../components/ContentDefaultHomePage.vue";
 import ImageUploadTest from "../views/ImageUploadTest.vue";
+import ContentHomePage from "../components/ContentHomePage.vue";
 
 Vue.use(VueRouter);
 
@@ -57,8 +56,8 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: "",
-        name: "contentDefaultHomePage",
-        component: ContentDefaultHomePage,
+        name: "",
+        component: ContentHomePage,
       },
       {
         path: "products",
@@ -79,11 +78,6 @@ const routes: Array<RouteConfig> = [
         path: "customerInfoPage",
         name: "customerInfoPage",
         component: CustomerInfoPage,
-      },
-      {
-        path: "productPageByCategory",
-        name: "productPageByCategory",
-        component: ProductPageByCategory,
       },
     ],
   },

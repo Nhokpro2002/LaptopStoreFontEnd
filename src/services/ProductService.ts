@@ -1,15 +1,5 @@
 import api from "./api";
-import { Product } from "@/models/ProductInterface";
-
-export enum Category {
-  GAMING_MOUSE = "GAMING_MOUSE",
-  KEYBOARD = "KEYBOARD",
-  LAPTOP = "LAPTOP",
-  SCREEN = "SCREEN",
-  SSD = "SSD",
-  LAPTOP_GAMING = "LAPTOP_GAMING",
-  LAPTOP_OFFICE = "LAPTOP_OFFICE",
-}
+import { Product, Category } from "@/models/ProductInterface";
 
 export const getProducts = (page: number, size: number) => {
   return api.get("/products", {
@@ -21,40 +11,29 @@ export const getProducts = (page: number, size: number) => {
 };
 
 export const getProductsByKeyword = (
-  keyword: string,
   page: number,
-  size: number
+  size: number,
+  keyword: string
 ) => {
   return api.get("/products/keyword", {
     params: {
-      keyword,
       page: page,
       size: size,
+      keyword,
     },
   });
 };
 
-export const countNumberItems = () => {
-  return api.get("/products/size");
-};
-
-export const countNumberItemsByCategory = (category: Category) => {
-  return api.get("/products/category/size", {
-    params: {
-      category,
-    },
-  });
-};
 export const getProductByCategory = (
   page: number,
   size: number,
-  productCategory: Category
+  category: Category
 ) => {
   return api.get("/products/category", {
     params: {
       page: page,
       size: size,
-      productCategory,
+      category,
     },
   });
 };

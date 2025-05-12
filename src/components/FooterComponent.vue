@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 v-footer {
-  background-color: #f5f5f5;
+  background-color: #c1b8b8;
   padding: 20px 0;
 }
 

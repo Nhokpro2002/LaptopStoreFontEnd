@@ -1,5 +1,6 @@
 <template>
   <v-container class="fill-height" fluid>
+    <AlertCustomComponent />
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6" lg="4">
         <v-card elevation="12" class="pa-4 rounded-xl">
@@ -9,19 +10,14 @@
           <v-card-text>
             <!-- Upload Image -->
             <v-form @submit.prevent="submitForm" class="mb-4">
-              <!--<v-form class="mb-4">-->
               <v-file-input
-                label="Choose Image"
+                label="Select Image"
                 v-model="imageFile"
                 accept="api/upload-image/*"
                 prepend-icon="mdi-image"
                 required
               ></v-file-input>
-              <!--<v-btn type="submit" color="primary" class="mt-2" block
-                >Upload</v-btn
-              >-->
             </v-form>
-
             <!-- Product Info -->
             <v-form @submit.prevent="submitForm" ref="form">
               <v-text-field
@@ -74,12 +70,17 @@
 <style></style>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import Vue from "vue";
 import { save } from "@/services/ProductService";
 import { upload } from "@/services/ImageUploadService";
 import { Product } from "@/models/ProductInterface";
+import { alertUser } from "@/services/AlertCustomService";
+import AlertCustomComponent from "./AlertCustomComponent.vue";
 
-export default defineComponent({
+export default Vue.extend({
+  components: {
+    AlertCustomComponent,
+  },
   data() {
     return {
       product: {
@@ -108,26 +109,24 @@ export default defineComponent({
       try {
         await this.uploadImage();
         const response = await save(this.product);
-        alert(response.data.message);
-      } catch (error) {
-        console.error("Error submitting form", error);
+        alertUser.showAlertSuccess(response.data.message);
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
       }
     },
 
     async uploadImage() {
       try {
         if (!this.imageFile) {
-          alert("No image selected.");
+          alertUser.showAlertError("No Image is selected");
           return;
         }
         const formData = new FormData();
         formData.append("file", this.imageFile);
         const response = await upload(formData);
-        //alert(response.data.message);
-        console.log(response.data.data);
         this.product.imageURL = response.data.data;
-      } catch (error) {
-        alert(error);
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
       }
     },
   },

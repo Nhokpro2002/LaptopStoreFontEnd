@@ -15,7 +15,7 @@
         <h2 class="font-weight-bold mb-2">{{ product.productName }}</h2>
         <p class="mb-1">{{ product.description }}</p>
         <p class="mb-1">
-          💰 <strong>Price:</strong> ${{ formatPrice(product.sellingPrice) }}
+          💰 <strong>Price:</strong> {{ formatPrice(product.sellingPrice) }}
         </p>
         <p class="mb-1">📦 <strong>Stock:</strong> {{ product.stock }}</p>
         <p class="mb-3">🏷️ <strong>Category:</strong> {{ product.category }}</p>
@@ -23,7 +23,7 @@
         <div class="d-flex gap-2">
           <v-btn color="red darken-1" dark @click="onBuyNow">Buy Now</v-btn>
           <v-btn color="yellow darken-1" dark @click="onAddToShoppingCart"
-            >Add Shopping Cart</v-btn
+            >Add ShoppingCart</v-btn
           >
         </div>
       </v-col>
@@ -44,11 +44,11 @@ export default Vue.extend({
     },
   },
   methods: {
-    getFullImageUrl(path: string) {
-      return `http://localhost:8080${path}`;
+    getFullImageUrl(path: string): string {
+      return path;
     },
     onBuyNow(): void {
-      console.log("you click button buy now");
+      alert("Cái button này dùng để trang trí");
     },
     async onAddToShoppingCart() {
       try {

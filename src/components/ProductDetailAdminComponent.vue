@@ -1,5 +1,6 @@
 <template>
   <v-card class="pa-4" max-width="600" outlined>
+    <AlertCustomComponent />
     <v-row>
       <v-col cols="12" md="4" class="d-flex justify-center">
         <v-img
@@ -40,16 +41,19 @@
 </template>
 
 <script lang="ts">
-//import { defineComponent } from "vue";
 import Vue from "vue";
-import { deleteProduct, updateProductPrice } from "@/services/ProductService";
 import UpdatePriceComponent from "@/components/UpdatePriceComponent.vue";
+import AlertCustomComponent from "@/components/AlertCustomComponent.vue";
+import { deleteProduct, updateProductPrice } from "@/services/ProductService";
 import { formatCurrency } from "@/utils/NumberFormatter";
+import { alertUser } from "@/services/AlertCustomService";
+//import { Product } from "@/models/ProductInterface";
 
 export default Vue.extend({
   name: "productDetailAdmin",
   components: {
     UpdatePriceComponent,
+    AlertCustomComponent,
   },
   props: {
     product: {
@@ -69,11 +73,10 @@ export default Vue.extend({
     async onDelete(productId: number) {
       try {
         const response = await deleteProduct(productId);
-        alert(response.data.message);
+        alertUser.showAlertSuccess(response.data.message);
         this.$emit("update-products");
-      } catch (error) {
-        alert("Delete product not successful");
-        console.error(error);
+      } catch (error: any) {
+        alertUser.showAlertError(error.response.data.message);
       }
     },
     toggleUpdate() {
@@ -81,7 +84,12 @@ export default Vue.extend({
     },
     async handlePriceUpdate(sellingPrice: number, productId: number) {
       const response = await updateProductPrice(sellingPrice, productId);
-      console.log("New price received from child:", sellingPrice);
+      alertUser.showAlertSuccess(
+        "New price for " +
+          `${this.product.productName}` +
+          ": " +
+          `${sellingPrice}`
+      );
       this.showUpdate = false;
       this.$emit("update-products"); // refresh product list
     },
