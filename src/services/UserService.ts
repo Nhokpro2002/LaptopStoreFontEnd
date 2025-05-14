@@ -23,3 +23,15 @@ export const getAllUser = () => {
 export const getUserQuantity = () => {
   return api.get("/users/size");
 };
+
+export const getUserInformation = () => {
+  return api.get("/users/information");
+};
+
+export const updateUserInformation = (newAddress: string) => {
+  return api.patch("/users/update", null, {
+    params: {
+      newAddress,
+    },
+  });
+};

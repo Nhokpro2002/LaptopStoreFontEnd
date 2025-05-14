@@ -81,8 +81,6 @@ export default Vue.extend({
   },
 
   mounted() {
-    //emitter.on("navigate-category", this.handleGetProductsByCategory);
-    //emitter.on("searching-item", this.handleUserSerachingItem);
     if (this.$route.query.itemName) {
       this.handleGetProductsByCategory();
     }
@@ -90,11 +88,6 @@ export default Vue.extend({
       this.handleUserSerachingItem();
     }
   },
-
-  /*beforeDestroy() {
-    emitter.off("navigate-category", this.handleGetProductsByCategory);
-    emitter.off("searching-item", this.handleUserSerachingItem);
-  },*/
 
   methods: {
     async handleGetProductsByCategory() {

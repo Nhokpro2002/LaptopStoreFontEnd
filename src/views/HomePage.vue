@@ -105,16 +105,16 @@ export default Vue.extend({
           this.$router.push("/home-page");
           break;
         case "Showroom System":
-          this.$router.push("showroom-system");
+          this.$router.push("/home-page/showroom-system");
           break;
         case "Shopping-Cart":
-          this.$router.push("shopping-cart");
+          this.$router.push("/home-page/shopping-cart");
           break;
         case "Order":
-          this.$router.push("order");
+          this.$router.push("/home-page/order");
           break;
         case "Account":
-          this.$router.push("account");
+          this.$router.push("/home-page/account");
           break;
         default:
       }

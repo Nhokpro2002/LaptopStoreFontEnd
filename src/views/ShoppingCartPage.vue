@@ -62,7 +62,9 @@
     <v-divider class="my-4" />
 
     <div class="text-right pr-4">
-      <v-btn class="background-color: blue" @click="createNewOrder"
+      <v-btn
+        class="background-color: blue"
+        @click="handlePayOrder(shoppingCartDTO.totalPrice)"
         >Place Order</v-btn
       >
       <strong
@@ -104,6 +106,7 @@ import {
   reduceItem,
 } from "@/services/ShoppingCartService";
 import { formatCurrency } from "@/utils/NumberFormatter";
+import { payOrder } from "@/services/PaymentService";
 
 interface ShoppingCartDTO {
   items: ShoppingCartItemDTO[];
@@ -152,8 +155,11 @@ export default defineComponent({
       const response = await reduceItem(productId);
     },
 
-    createNewOrder() {
-      this.$router.push("/home-page/order");
+    async handlePayOrder(totalPrice: number) {
+      //this.$router.push("/home-page/order");
+      const response = await payOrder(totalPrice);
+      // console.log(response);
+      window.location.href = response.data.url;
     },
     formatPrice(value: string | number): string {
       return formatCurrency(value);
@@ -162,13 +168,13 @@ export default defineComponent({
   mounted() {
     this.getAllProduct();
   },
-  watch: {
+  /*watch: {
     "shoppingCartDTO.items": {
       handler(newItems) {
         this.getAllProduct();
       },
       deep: true,
     },
-  },
+  },*/
 });
 </script>

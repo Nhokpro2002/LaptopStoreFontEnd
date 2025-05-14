@@ -11,7 +11,7 @@ import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
 import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
-import CustomerInfoPage from "../views/CustomerInfoPage.vue";
+import CustomerAccountPage from "../views/CustomerAccountPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
 import ChartWrapper from "../components/ChartWrapper.vue";
 import ImageUploadTest from "../views/ImageUploadTest.vue";
@@ -75,9 +75,9 @@ const routes: Array<RouteConfig> = [
         component: NewOrder,
       },
       {
-        path: "customerInfoPage",
-        name: "customerInfoPage",
-        component: CustomerInfoPage,
+        path: "account",
+        name: "customerAccountPage",
+        component: CustomerAccountPage,
       },
     ],
   },
