@@ -1,16 +1,31 @@
 <template>
   <div>
     <h1 class="mb-4">Product List Admin</h1>
-    <v-btn
-      class="mx-2"
-      fab
-      dark
-      x-large
-      color="indigo"
-      @click="addNewProductPage"
-    >
-      <v-icon dark> mdi-plus </v-icon>
-    </v-btn>
+
+    <div style="display: flex; justify-content: space-between">
+      <v-btn
+        class="mx-2"
+        fab
+        dark
+        x-large
+        color="indigo"
+        @click="addNewProductPage"
+      >
+        <v-icon dark> mdi-plus </v-icon>
+      </v-btn>
+      <v-text-field
+        label="Search for products..."
+        outlined
+        solo
+        dense
+        hide-details
+        class="mr-4"
+        style="max-width: 500px; height: 80px"
+        append-icon="mdi-magnify"
+        @click:append="handleSearchingItem(userInputKeyword)"
+        v-model="userInputKeyword"
+      ></v-text-field>
+    </div>
     <div v-if="products.length">
       <v-container fluid>
         <v-row>
@@ -44,16 +59,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import ProductDetailAdmin from "./ProductDetailAdminComponent.vue";
-import { getProducts } from "@/services/ProductService";
-
-interface Product {
-  productName: string;
-  description: string;
-  sellingPrice: string;
-  category: string;
-  imageUrl: string;
-}
+import ProductDetailAdmin from "../components/ProductDetailAdminComponent.vue";
+import { getProducts, countProductNumber } from "@/services/ProductService";
+import { Product } from "@/models/ProductInterface";
 
 export default Vue.extend({
   components: {
@@ -92,10 +100,20 @@ export default Vue.extend({
     addNewProductPage() {
       this.$router.push("/addNewProductAdmin");
     },
+
+    async handleCountProductNumber() {
+      try {
+        const response = await countProductNumber();
+        this.totalItems = response.data.data;
+      } catch (error: any) {
+        console.log(error);
+      }
+    },
   },
 
   async created() {
     await this.loadProducts();
+    await this.handleCountProductNumber();
   },
 });
 </script>

@@ -156,10 +156,9 @@ export default defineComponent({
     },
 
     async handlePayOrder(totalPrice: number) {
-      //this.$router.push("/home-page/order");
       const response = await payOrder(totalPrice);
-      // console.log(response);
-      window.location.href = response.data.url;
+      console.log(response);
+      window.location.href = response.data.data;
     },
     formatPrice(value: string | number): string {
       return formatCurrency(value);

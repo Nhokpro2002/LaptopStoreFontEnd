@@ -10,6 +10,10 @@ export const getProducts = (page: number, size: number) => {
   });
 };
 
+export const countProductNumber = () => {
+  return api.get("/products/size");
+};
+
 export const getProductsByKeyword = (
   page: number,
   size: number,

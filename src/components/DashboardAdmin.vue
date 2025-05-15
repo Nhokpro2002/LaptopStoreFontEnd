@@ -1,80 +1,96 @@
 <template>
-  <v-app class="dashboard_app">
-    <h1>Dashboard</h1>
-
-    <v-container>
-      <v-row align-content="center" dense>
-        <v-col
-          v-for="(item, index) in cards"
-          :key="index"
-          cols="12"
-          sm="6"
-          md="4"
-          lg="3"
-        >
-          <v-card color="#273746" class="pa-4" width="250" height="150">
-            <v-card-title class="white--text text-h4">
-              {{ item.title }}
-            </v-card-title>
-            <v-card-text class="white--text text-h4">
-              {{ item.value }} +
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-      <ChartWrapper />
-    </v-container>
-  </v-app>
+  <v-row>
+    <v-col cols="12" lg="6" md="6" sm="12">
+      <div class="chart">
+        <OrderQuantityBarChart
+          :chart-data="chartData.orderData"
+          :chart-options="chartOptions"
+        />
+      </div>
+    </v-col>
+    <v-col cols="12" lg="6" md="6" sm="12">
+      <div class="chart">
+        <ProfitLineChart
+          :chart-data="chartData.profitData"
+          :chart-options="chartOptions"
+        />
+      </div>
+    </v-col>
+  </v-row>
 </template>
 
-<style>
-.dashboard_app {
-  background-color: #0a0b0b !important;
+<style scoped>
+.chart {
+  background-color: #abb2b9;
 }
 </style>
 
 <script lang="ts">
 import Vue from "vue";
-import ChartWrapper from "./ChartWrapper.vue";
-import { getUserQuantity } from "@/services/UserService";
-import { getOrderQuantity } from "@/services/YourOrderService";
+import OrderQuantityBarChart from "./OrderQuantityBarChart.vue";
+import ProfitLineChart from "./ProfitLineChart.vue";
 
 export default Vue.extend({
-  name: "DashboardAdmin",
-  components: { ChartWrapper },
+  name: "ChartWrapper",
+  components: {
+    OrderQuantityBarChart,
+    ProfitLineChart,
+  },
   data() {
     return {
-      cards: [
-        { title: "Profit", value: 0 },
-        { title: "Customer", value: 0 },
-        { title: "Order", value: 0 },
-        { title: "Product", value: 0 },
-      ] as { title: string; value: number }[],
+      chartData: {
+        orderData: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          datasets: [
+            {
+              label: "Number of orders per month",
+              backgroundColor: "#ea5e47",
+              data: [5, 35, 15, 60, 4, 22, 10, 65, 90, 20, 80, 10],
+            },
+          ],
+        },
+        profitData: {
+          labels: [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December",
+          ],
+          datasets: [
+            {
+              label: "Profit per month",
+              backgroundColor: "#2e86c1",
+              data: [70, 67, 80, 100, 89, 80, 55, 87, 90, 80, 67, 44],
+            },
+          ],
+        },
+      },
+      chartOptions: {
+        responsive: true,
+        maintainAspectRatio: false,
+      },
     };
-  },
-
-  mounted() {
-    this.fetchDashboardData();
-  },
-
-  methods: {
-    async fetchDashboardData() {
-      try {
-        const [customerQuantity, orderQuantity] = await Promise.all([
-          getUserQuantity(),
-          getOrderQuantity(),
-        ]);
-
-        this.cards = [
-          { title: "Profit", value: 1000 },
-          { title: "Customer", value: customerQuantity.data.data },
-          { title: "Order", value: orderQuantity.data.data },
-          //{ title: "Product", value: productQuantity.data.data },
-        ];
-      } catch (error) {
-        console.error("Failed to fetch dashboard data:", error);
-      }
-    },
   },
 });
 </script>

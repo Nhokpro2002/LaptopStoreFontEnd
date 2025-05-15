@@ -92,9 +92,9 @@ export default Vue.extend({
 
         if (userRole === "ROLE_CUSTOMER") {
           this.$store.dispatch("moduleUserAuthentication/userLogIn");
-          setTimeout(() => {
-            this.$router.push("/home-page");
-          }, 2000);
+          //setTimeout(() => {
+          this.$router.push("/home-page");
+          //}, 2000);
         } else if (userRole === "ROLE_ADMIN") {
           this.$store.dispatch("moduleUserAuthentication/userLogIn");
 

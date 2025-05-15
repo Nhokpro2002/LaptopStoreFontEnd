@@ -6,20 +6,26 @@ import RegisterPage from "../views/RegisterPage.vue";
 import ProductPage from "../views/ProductPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import AdminPage from "../views/AdminPage.vue";
-import ProductPageAdmin from "../components/ProductPageAdmin.vue";
+import ProductPageAdmin from "../views/ProductPageAdmin.vue";
 import ShoppingCartPage from "../views/ShoppingCartPage.vue";
 import NewOrder from "../components/NewOrder.vue";
 import AllUser from "../components/AllUser.vue";
 import AddProductAdminComponent from "../components/AddProductAdminComponent.vue";
 import CustomerAccountPage from "../views/CustomerAccountPage.vue";
 import DashboardAdmin from "../components/DashboardAdmin.vue";
-import ChartWrapper from "../components/ChartWrapper.vue";
 import ImageUploadTest from "../views/ImageUploadTest.vue";
 import ContentHomePage from "../components/ContentHomePage.vue";
+import AboutAdminPage from "../views/AboutAminPage.vue";
+import ResultPaymentPage from "../views/ResultPaymentPage.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  {
+    path: "https://fea5-222-252-25-162.ngrok-free.app",
+    name: "result-payment",
+    component: ResultPaymentPage,
+  },
   {
     path: "/register",
     name: "register",
@@ -34,11 +40,6 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "login",
     component: LoginPage,
-  },
-  {
-    path: "/testChart",
-    name: "testChart",
-    component: ChartWrapper,
   },
 
   {
@@ -107,9 +108,14 @@ const routes: Array<RouteConfig> = [
         component: ProductPageAdmin,
       },
       {
-        path: "dashboardAdmin",
+        path: "dashboard",
         name: "dashboardAdmin",
         component: DashboardAdmin,
+      },
+      {
+        path: "about",
+        name: "aboutAdminPage",
+        component: AboutAdminPage,
       },
     ],
   },

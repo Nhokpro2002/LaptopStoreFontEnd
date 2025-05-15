@@ -7,3 +7,20 @@ export const payOrder = (totalPrice: number) => {
     },
   });
 };
+
+/*export const processReruntedResult = (allParams: Map<string, any>, totalPrice: number) => {
+  return api.get("/payment/vnpay-return", {
+    params: {
+      allParams,
+      totalPrice,
+    },
+  });
+};*/
+
+export const processReruntedResult = (responseCode: string | null) => {
+  return api.get("/payment/vnpay-return", {
+    params: {
+      responseCode,
+    },
+  });
+};
