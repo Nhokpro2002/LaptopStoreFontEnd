@@ -67,6 +67,10 @@
 
 <script lang="ts">
 import FooterComponent from "@/components/FooterComponent.vue";
+import {
+  getTokenFacebookReturn,
+  getUserInfo,
+} from "@/services/FacebookLoginService";
 import Vue from "vue";
 export default Vue.extend({
   components: {
@@ -79,7 +83,7 @@ export default Vue.extend({
       navigationHeaderItems: [
         { itemName: "Home", icon: "mdi-home-circle" },
         { itemName: "Category", icon: "mdi-laptop" },
-        { itemName: "Showroom System", icon: "mdi-comment-question-outline" },
+        { itemName: "Message", icon: "mdi-chat" },
         { itemName: "Shopping-Cart", icon: "mdi-cart-outline" },
         { itemName: "Order", icon: "mdi-order-bool-ascending" },
         { itemName: "Account", icon: "mdi-account-outline" },
@@ -139,6 +143,23 @@ export default Vue.extend({
           console.log("you are in this location");
         });
     },
+
+    async handleGetTokenFacebookReturn() {
+      const searchParams = new URLSearchParams(window.location.search);
+      const code = searchParams.get("code");
+      if (code) {
+        const response = await getTokenFacebookReturn(code);
+        console.log(response.data.data);
+      }
+    },
+
+    /* async handleGetUserInfo() {
+      token 
+    }*/
+  },
+
+  mounted() {
+    this.handleGetTokenFacebookReturn();
   },
 });
 </script>

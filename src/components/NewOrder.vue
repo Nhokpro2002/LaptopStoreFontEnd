@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div></div>
+  <!--<div>
     <HeaderComponent />
 
     <v-container>
@@ -39,11 +40,11 @@
     </v-container>
 
     <FooterComponent />
-  </div>
+  </div>-->
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+/*import { defineComponent } from "vue";
 import { createYourOrder } from "@/services/YourOrderService";
 import HeaderComponent from "../components/HeaderComponent.vue";
 import FooterComponent from "../components/FooterComponent.vue";
@@ -122,5 +123,5 @@ export default defineComponent({
       }).format(num);
     },
   },
-});
+});*/
 </script>

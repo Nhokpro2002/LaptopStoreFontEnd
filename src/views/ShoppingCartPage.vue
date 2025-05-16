@@ -167,13 +167,13 @@ export default defineComponent({
   mounted() {
     this.getAllProduct();
   },
-  /*watch: {
+  watch: {
     "shoppingCartDTO.items": {
       handler(newItems) {
         this.getAllProduct();
       },
       deep: true,
     },
-  },*/
+  },
 });
 </script>
