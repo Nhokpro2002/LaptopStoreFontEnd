@@ -83,7 +83,7 @@ export default Vue.extend({
       navigationHeaderItems: [
         { itemName: "Home", icon: "mdi-home-circle" },
         { itemName: "Category", icon: "mdi-laptop" },
-        { itemName: "Message", icon: "mdi-chat" },
+        { itemName: "Contact", icon: "mdi-chat" },
         { itemName: "Shopping-Cart", icon: "mdi-cart-outline" },
         { itemName: "Order", icon: "mdi-order-bool-ascending" },
         { itemName: "Account", icon: "mdi-account-outline" },
@@ -119,6 +119,9 @@ export default Vue.extend({
           break;
         case "Account":
           this.$router.push("/home-page/account");
+          break;
+        case "Contact":
+          this.$router.push("/home-page/contact");
           break;
         default:
       }

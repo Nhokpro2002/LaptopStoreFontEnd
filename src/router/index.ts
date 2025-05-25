@@ -17,6 +17,8 @@ import DashboardAdmin from "../components/DashboardAdmin.vue";
 import ContentHomePage from "../components/ContentHomePage.vue";
 import AboutAdminPage from "../views/AboutAminPage.vue";
 import ResultPaymentPage from "../views/ResultPaymentPage.vue";
+import ContactPage from "../views/ContactPage.vue";
+import AchievementPage from "../views/AchievementPage.vue";
 
 Vue.use(VueRouter);
 
@@ -85,6 +87,11 @@ const routes: Array<RouteConfig> = [
         name: "customerAccountPage",
         component: CustomerAccountPage,
       },
+      {
+        path: "contact",
+        name: "contactPage",
+        component: ContactPage,
+      },
     ],
   },
 
@@ -121,6 +128,11 @@ const routes: Array<RouteConfig> = [
         path: "about",
         name: "aboutAdminPage",
         component: AboutAdminPage,
+      },
+      {
+        path: "achivement",
+        name: "achivementPage",
+        component: AchievementPage,
       },
     ],
   },

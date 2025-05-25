@@ -17,11 +17,7 @@
     <div class="row">
       <div class="column">
         <div class="card">
-          <img
-            src="https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-6/456821693_1814167652441582_525605006680716638_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tNMdrmdZeTUQ7kNvwHWZA5l&_nc_oc=AdlA8IJELFW-MAJb0eH-rKxR_8xxGnAadm0VGhnNQoV9L_NtkRwto2ylu54ADoWxp7Q&_nc_zt=23&_nc_ht=scontent.fhan17-1.fna&_nc_gid=OPGqD-p_1CzTmxIqU7j-zA&oh=00_AfJcL0-YEueBTJBxdL-uz5-p0JlqkAv43kl3D7ndilI32A&oe=682B867C"
-            alt="Jane"
-            style="width: 100%"
-          />
+          <!--<img src="/w3images/team3.jpg" alt="Jane" style="width: 100%" />-->
           <div class="container">
             <h2>Jane Doe</h2>
             <p class="title">Frontend Developer</p>
@@ -34,11 +30,7 @@
 
       <div class="column">
         <div class="card">
-          <img
-            src="https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-6/456821693_1814167652441582_525605006680716638_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tNMdrmdZeTUQ7kNvwHWZA5l&_nc_oc=AdlA8IJELFW-MAJb0eH-rKxR_8xxGnAadm0VGhnNQoV9L_NtkRwto2ylu54ADoWxp7Q&_nc_zt=23&_nc_ht=scontent.fhan17-1.fna&_nc_gid=OPGqD-p_1CzTmxIqU7j-zA&oh=00_AfJcL0-YEueBTJBxdL-uz5-p0JlqkAv43kl3D7ndilI32A&oe=682B867C"
-            alt="Mike"
-            style="width: 100%"
-          />
+          <!--<img src="/w3images/team3.jpg" alt="Mike" style="width: 100%" />-->
           <div class="container">
             <h2>Nhokpro2002</h2>
             <p class="title">Backend Developer</p>
@@ -51,11 +43,7 @@
 
       <div class="column">
         <div class="card">
-          <img
-            src="https://scontent.fhan17-1.fna.fbcdn.net/v/t39.30808-6/456821693_1814167652441582_525605006680716638_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tNMdrmdZeTUQ7kNvwHWZA5l&_nc_oc=AdlA8IJELFW-MAJb0eH-rKxR_8xxGnAadm0VGhnNQoV9L_NtkRwto2ylu54ADoWxp7Q&_nc_zt=23&_nc_ht=scontent.fhan17-1.fna&_nc_gid=OPGqD-p_1CzTmxIqU7j-zA&oh=00_AfJcL0-YEueBTJBxdL-uz5-p0JlqkAv43kl3D7ndilI32A&oe=682B867C"
-            alt="John"
-            style="width: 100%"
-          />
+          <!--<img src="/w3images/team3.jpg" alt="John" style="width: 100%" />-->
           <div class="container">
             <h2>Nhokpro2002</h2>
             <p class="title">Web Designer</p>
