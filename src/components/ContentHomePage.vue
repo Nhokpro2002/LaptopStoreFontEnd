@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!--<div>
     <div>
       <img
         src="https://hanoicomputercdn.com/media/lib/15-07-2024/2.jpg"
@@ -32,7 +32,49 @@
       <div></div>
       <div class="div-sale-product-background"></div>
     </div>
-  </div>
+  </div>-->
+  <v-container>
+    <!-- Banner quảng cáo -->
+    <v-img
+      src="/image/Banner-gaming_laptops.jpg"
+      height="300"
+      class="mb-6 rounded-lg"
+      cover
+    ></v-img>
+
+    <!-- Danh mục sản phẩm nổi bật -->
+    <h2 class="text-h5 font-weight-bold mb-4">Laptop nổi bật</h2>
+    <v-row>
+      <v-col
+        v-for="product in featuredProducts"
+        :key="product.id"
+        cols="12"
+        sm="6"
+        md="4"
+        lg="3"
+      >
+        <v-card class="rounded-xl" outlined>
+          <v-img :src="product.image" height="200" class="rounded-t-xl"></v-img>
+          <v-card-title class="text-subtitle-1 font-weight-medium">
+            {{ product.name }}
+          </v-card-title>
+          <v-card-subtitle class="text-primary font-weight-bold">
+            {{ formatPrice(product.price) }}
+          </v-card-subtitle>
+          <v-card-actions>
+            <v-btn color="primary" @click="goToDetail(product.id)">
+              Xem chi tiết
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <!-- Khuyến mãi -->
+    <v-alert type="info" class="mt-8" border="left" colored-border>
+      Miễn phí vận chuyển cho đơn hàng từ 10.000.000 VNĐ
+    </v-alert>
+  </v-container>
 </template>
 <style scoped>
 .image {
@@ -51,9 +93,12 @@
   height: 100%;
   opacity: 0.5; /* Optional: make it slightly transparent if needed */
 }
+.text-primary {
+  color: #1976d2;
+}
 </style>
-<script lang="ts">
-import Vue from "vue";
+<script>
+/*import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
@@ -91,5 +136,82 @@ export default Vue.extend({
       ],
     };
   },
-});
+});*/
+export default {
+  name: "HomePage",
+  data() {
+    return {
+      featuredProducts: [
+        {
+          id: 1,
+          name: "Laptop Dell XPS 13",
+          price: 28990000,
+          image:
+            "https://i.pinimg.com/736x/d8/0e/af/d80eaf072bed31145080967d76fc3c84.jpg",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/74da3746314261.584fd9b657f39.png",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/74da3746314261.584fd9b657f39.png",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/74da3746314261.584fd9b657f39.png",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://i.pinimg.com/736x/d8/0e/af/d80eaf072bed31145080967d76fc3c84.jpg",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://i.pinimg.com/736x/d8/0e/af/d80eaf072bed31145080967d76fc3c84.jpg",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/74da3746314261.584fd9b657f39.png",
+        },
+        {
+          id: 2,
+          name: "MacBook Pro 14",
+          price: 49990000,
+          image:
+            "https://mir-s3-cdn-cf.behance.net/project_modules/hd/74da3746314261.584fd9b657f39.png",
+        },
+        // Thêm sản phẩm khác tại đây
+      ],
+    };
+  },
+  methods: {
+    formatPrice(value) {
+      return new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(value);
+    },
+    goToDetail(id) {
+      this.$router.push({ name: "ProductDetail", params: { id } });
+    },
+  },
+};
 </script>

@@ -22,13 +22,20 @@
             <v-btn width="20" height="20" color="red">Delete</v-btn>
           </div>
 
-          <div style="margin-right: 150px">
+          <div style="margin-right: 35px">
             <p style="font-weight: bold; font-size: 18px">
               {{ item.productDTO.productName }}
             </p>
             <p>SellingPrice: {{ formatPrice(item.productDTO.sellingPrice) }}</p>
             <p>Quantity: {{ item.productQuantity }}</p>
-            <p style="font-weight: bold; font-size: 18px; color: red">
+            <p
+              style="
+                font-weight: bold;
+                font-size: 18px;
+                color: red;
+                width: 250px;
+              "
+            >
               Into Money:
               {{
                 formatPrice(
